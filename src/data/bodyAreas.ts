@@ -26,7 +26,7 @@ export const bodyAreas: BodyArea[] = [
     slug: "knee-pain",
     name: "Knee Pain",
     shortName: "Knee",
-    icon: "🦵",
+    icon: "knee",
     headline: "Understanding Your Knee Pain Options",
     subheadline:
       "Take our 2-minute joint health assessment to explore which non-surgical approaches may be suitable for your condition.",
@@ -36,7 +36,7 @@ export const bodyAreas: BodyArea[] = [
       {
         slug: "osteoarthritis",
         name: "Knee Osteoarthritis",
-        icon: "🦴",
+        icon: "bone",
         description:
           "Knee osteoarthritis is a degenerative condition characterised by the gradual breakdown of cartilage that cushions the joint surfaces. According to NHS data, osteoarthritis affects approximately 1 in 5 adults over the age of 45 in the UK. Early symptoms typically include intermittent aching on the inner side of the knee and occasional swelling after activity. As the condition progresses, patients may experience persistent pain throughout the knee, morning stiffness lasting 30 minutes or more, a grinding or crunching sensation during movement, and visible swelling. Without intervention, cartilage continues to wear until bone-on-bone contact develops, leading to significant functional limitation, muscle atrophy around the joint, and altered gait patterns. Research published in Frontiers in Medicine (2024) compared injection therapies for knee osteoarthritis and found varying outcomes across cortisol, hyaluronic acid, PRP, and bone marrow aspirate concentrate approaches.",
         symptoms: [
@@ -53,7 +53,7 @@ export const bodyAreas: BodyArea[] = [
       {
         slug: "meniscus-tears",
         name: "Meniscus Tears",
-        icon: "💥",
+        icon: "tear",
         description:
           "A meniscus tear involves damage to the C-shaped cartilage that acts as a shock absorber between the thighbone and shinbone. Meniscus tears are among the most common knee injuries, with degenerative tears frequently occurring in adults over 40 and traumatic tears common in younger, active individuals. Typical symptoms include pain when twisting or rotating the knee, swelling and stiffness, difficulty fully straightening the leg, and a locking or catching sensation during movement. Many patients describe a feeling of instability, as though the knee might give way. A 2024 systematic review published in PMC examined PRP therapy for degenerative meniscus tears and found variable MRI outcomes but significant improvements in pain scores. Conservative management including physiotherapy is often the first approach, with surgical intervention reserved for tears that cause persistent mechanical symptoms such as locking.",
         symptoms: [
@@ -69,7 +69,7 @@ export const bodyAreas: BodyArea[] = [
       {
         slug: "acl-tears",
         name: "ACL Tears",
-        icon: "⚡",
+        icon: "lightning",
         description:
           "An anterior cruciate ligament (ACL) tear is a significant knee injury that commonly occurs during sports involving sudden stops, direction changes, or pivoting movements. At the time of injury, many patients report hearing or feeling a distinct 'pop' in the knee, followed by rapid swelling, severe pain, and instability. The knee often feels as though it will give way during activities that require cutting or pivoting. ACL tears can range from partial to complete, and the choice of treatment depends on the patient's activity level, age, and the degree of instability. A 2025 randomised controlled trial published in PMC compared non-surgical treatment of ACL tears using bone marrow concentrate and platelet products against exercise therapy alone, with two-year follow-up data showing differing outcomes between groups. Reconstruction surgery remains common for active individuals, though non-surgical approaches are increasingly being studied.",
         symptoms: [
@@ -94,7 +94,7 @@ export const bodyAreas: BodyArea[] = [
     slug: "hip-pain",
     name: "Hip Pain",
     shortName: "Hip",
-    icon: "🦴",
+    icon: "hip",
     headline: "Understanding Your Hip Pain Options",
     subheadline:
       "Take our 2-minute joint health assessment to explore which non-surgical approaches may be suitable for your hip condition.",
@@ -104,7 +104,7 @@ export const bodyAreas: BodyArea[] = [
       {
         slug: "hip-arthritis",
         name: "Hip Arthritis & Osteoarthritis",
-        icon: "🦴",
+        icon: "bone",
         description:
           "Hip osteoarthritis involves the progressive deterioration of cartilage within the hip joint, leading to pain, stiffness, and reduced range of motion. It is one of the most prevalent forms of arthritis, with the hip being the second most commonly affected joint after the knee. Patients typically first notice groin pain and stiffness, particularly in the morning or after prolonged sitting. As the condition progresses, pain may worsen with activity and eventually become constant, making daily tasks such as walking, climbing stairs, bending, and putting on shoes increasingly difficult. Research published in The Lancet (2019) examined hip replacement longevity, finding that 80-85% of implants last 20 years. However, studies have also explored regenerative approaches, with evidence suggesting that stem cell-based injections may help slow or support early cartilage maintenance in some patients with mild to moderate hip arthritis. Individual assessment determines suitability.",
         symptoms: [
@@ -121,7 +121,7 @@ export const bodyAreas: BodyArea[] = [
       {
         slug: "labrum-tears",
         name: "Hip Labrum Tears",
-        icon: "💥",
+        icon: "tear",
         description:
           "A hip labral tear involves damage to the ring of cartilage (labrum) that follows the outside rim of the hip joint socket, helping to hold the head of the femur securely in place. Labral tears may result from structural abnormalities such as femoroacetabular impingement (FAI), repetitive movements common in sports, or degenerative changes associated with ageing. Patients typically experience deep groin pain, a clicking or catching sensation in the hip, pain during hip rotation or prolonged sitting, and a feeling of instability. Hip arthroscopy for labral repair has an overall success rate of approximately 85-90%, though research shows that labral debridement has a failure rate of 63.6% compared to 22.8% for labral repair or reconstruction. Recovery from arthroscopic hip surgery typically requires 3-6 months. Regenerative approaches are being studied as potential complementary options to support healing.",
         symptoms: [
@@ -137,7 +137,7 @@ export const bodyAreas: BodyArea[] = [
       {
         slug: "bursitis",
         name: "Hip Bursitis",
-        icon: "🔥",
+        icon: "flame",
         description:
           "Hip bursitis, also known as greater trochanteric pain syndrome (GTPS), involves inflammation of the fluid-filled sacs (bursae) that cushion the bones, tendons, and muscles near the hip joint. It causes pain on the outside of the hip that is often worse when lying on the affected side, climbing stairs, or after prolonged walking. The condition is particularly common in middle-aged and older adults, and in runners. A network meta-analysis published in PMC (2024) examined treatments for greater trochanteric pain syndrome and found that PRP injection had the highest probability of being the most effective treatment at both 1-3 months and 6-12 months follow-up. The study also found that while steroid injections provided initial improvement, the benefit was maximal at 6 weeks and not sustained beyond 24 weeks, whereas PRP showed sustained improvement at 2 years.",
         symptoms: [
@@ -162,7 +162,7 @@ export const bodyAreas: BodyArea[] = [
     slug: "shoulder-pain",
     name: "Shoulder Pain",
     shortName: "Shoulder",
-    icon: "💪",
+    icon: "shoulder",
     headline: "Understanding Your Shoulder Pain Options",
     subheadline:
       "Take our 2-minute joint health assessment to explore which non-surgical approaches may be suitable for your shoulder condition.",
@@ -172,7 +172,7 @@ export const bodyAreas: BodyArea[] = [
       {
         slug: "rotator-cuff",
         name: "Rotator Cuff Tears",
-        icon: "💥",
+        icon: "tear",
         description:
           "Rotator cuff tears involve damage to one or more of the four tendons that stabilise the shoulder joint and enable arm rotation. These tears may be partial or full-thickness, and can result from acute injury or gradual degeneration over time. Patients typically experience pain when reaching overhead or behind the back, weakness in the arm, difficulty lifting objects, and night pain that disrupts sleep. Published data on rotator cuff repair surgery shows an overall complication rate of approximately 10.5%, with retear rates ranging from 11% for small tears to as high as 94% for massive tears. A Mayo Clinic study (2024) examining real-world evidence found that bone marrow aspirate concentrate used during rotator cuff repair was associated with a nearly threefold reduction in revision surgery rates. A separate 2020 RCT found that BMAC treatment significantly improved function and pain at 3 months compared to exercise therapy alone.",
         symptoms: [
@@ -189,7 +189,7 @@ export const bodyAreas: BodyArea[] = [
       {
         slug: "frozen-shoulder",
         name: "Frozen Shoulder",
-        icon: "❄️",
+        icon: "snowflake",
         description:
           "Frozen shoulder (adhesive capsulitis) is a condition characterised by progressive stiffness and pain in the shoulder joint, affecting 2-5.3% of the population. The condition typically progresses through three stages: the freezing stage (increasing pain over 6-9 months), the frozen stage (stiffness with reduced range of motion lasting 4-12 months), and the thawing stage (gradual improvement over 6-24 months). The total duration can span 1-3 years. It is more common in patients with diabetes and after prolonged periods of immobilisation. A systematic review published in PMC (2023) examined PRP therapy for frozen shoulder and found that both PRP and steroid injections improved outcomes at 3 months, but PRP demonstrated significantly better range of motion in passive forward flexion and improved SPADI scores compared to steroid injection, with no reported side effects beyond injection-site discomfort.",
         symptoms: [
@@ -205,7 +205,7 @@ export const bodyAreas: BodyArea[] = [
       {
         slug: "impingement",
         name: "Shoulder Impingement",
-        icon: "⚠️",
+        icon: "alert",
         description:
           "Shoulder impingement syndrome occurs when the tendons of the rotator cuff become compressed or irritated as they pass through the subacromial space — the narrow passage beneath the acromion bone at the top of the shoulder. This compression causes pain and inflammation, particularly when lifting the arm above shoulder height. The condition is common in people who perform repetitive overhead movements, including swimmers, painters, and construction workers. Initial treatment typically involves physiotherapy focused on rotator cuff strengthening and postural correction, along with anti-inflammatory medication. Steroid injections may provide short-term relief. If conservative management fails after 3-6 months, subacromial decompression surgery may be considered. Research has explored PRP therapy as a potential supportive approach, with its anti-inflammatory properties and growth factors potentially helping to reduce tendon irritation. However, chronic impingement left untreated can lead to rotator cuff tears.",
         symptoms: [
@@ -230,7 +230,7 @@ export const bodyAreas: BodyArea[] = [
     slug: "back-pain",
     name: "Back Pain",
     shortName: "Back",
-    icon: "🔙",
+    icon: "back",
     headline: "Understanding Your Back Pain Options",
     subheadline:
       "Take our 2-minute assessment to explore which non-surgical approaches may be suitable for your back condition.",
@@ -240,7 +240,7 @@ export const bodyAreas: BodyArea[] = [
       {
         slug: "disc-herniation",
         name: "Disc Herniation & Bulging Discs",
-        icon: "💥",
+        icon: "tear",
         description:
           "A disc herniation occurs when the soft, gel-like centre of a spinal disc pushes through a tear in the tougher exterior, potentially compressing nearby nerves. This can cause sharp, burning pain in the lower back that radiates to the buttock and leg, along with numbness, tingling, or muscle weakness in the affected area. Symptoms are often worse with sitting, bending, or coughing. Microdiscectomy — the surgical removal of herniated disc material — has a failure rate of 19-25% according to published data, with re-herniation at the same level occurring in 5-15% of patients within 2 years. Recovery from microdiscectomy typically takes 6-12 weeks, while spinal fusion requires 3-6 months with up to 1 year for bone consolidation. Regenerative approaches including PRP and stem cell injections are being studied for their potential to support disc repair, with some published data showing improvements in pain and function scores.",
         symptoms: [
@@ -256,7 +256,7 @@ export const bodyAreas: BodyArea[] = [
       {
         slug: "sciatica",
         name: "Sciatica",
-        icon: "⚡",
+        icon: "lightning",
         description:
           "Sciatica refers to pain that radiates along the path of the sciatic nerve, which branches from the lower back through the hips and buttocks and down each leg. It typically occurs when a herniated disc, bone spur, or narrowing of the spine compresses part of the nerve. The pain can range from a mild ache to sharp, burning, or electric-shock-like sensations, and usually affects only one side of the body. Many cases of sciatica resolve with conservative management within 4-6 weeks, including physiotherapy and pain medication. However, chronic sciatica lasting more than 12 weeks may require more interventional approaches. Epidural steroid injections provide temporary relief of nerve inflammation but do not address the underlying cause. Research has explored fluoroscopy-guided PRP injections to deliver concentrated growth factors directly to the affected area, with some studies showing improvements in pain ratings and quality of life measures.",
         symptoms: [
@@ -272,7 +272,7 @@ export const bodyAreas: BodyArea[] = [
       {
         slug: "spinal-degeneration",
         name: "Spinal Degeneration",
-        icon: "🔗",
+        icon: "chain",
         description:
           "Degenerative disc disease is a chronic condition in which the intervertebral discs gradually lose hydration, height, and structural integrity over time. This leads to chronic, dull aching in the lower back that worsens with sitting, bending, or twisting, interspersed with episodes of severe pain. As discs deteriorate, they can lead to spinal stenosis — a narrowing of the spinal canal that compresses nerves. Lumbar spinal fusion, a common surgical intervention, has a failure rate of 30-46% according to published clinical data, with 36% of patients developing transition syndrome within 5 years — degeneration at adjacent spinal levels caused by the altered mechanics of fusion. Success rates diminish dramatically with repeat surgeries: approximately 50% for the first operation, 30% for the second, 15% for the third, and 5% for the fourth. Intradiscal stem cell injection is being studied for its potential to support disc structure and hydration.",
         symptoms: [
@@ -297,7 +297,7 @@ export const bodyAreas: BodyArea[] = [
     slug: "elbow-pain",
     name: "Elbow Pain",
     shortName: "Elbow",
-    icon: "💪",
+    icon: "elbow",
     headline: "Understanding Your Elbow Pain Options",
     subheadline:
       "Take our 2-minute assessment to explore which non-surgical approaches may be suitable for your elbow condition.",
@@ -307,7 +307,7 @@ export const bodyAreas: BodyArea[] = [
       {
         slug: "tennis-elbow",
         name: "Tennis & Golfer's Elbow",
-        icon: "🎾",
+        icon: "tennis",
         description:
           "Tennis elbow (lateral epicondylitis) and golfer's elbow (medial epicondylitis) are tendon overuse conditions causing pain on the outside or inside of the elbow respectively. Tennis elbow causes pain and burning on the outer elbow with weak grip strength, worsened by forearm activities such as turning a doorknob or shaking hands. Golfer's elbow causes inner elbow pain with stiffness and weakness in the hands. A randomised controlled trial by Pabst et al. published in the American Journal of Sports Medicine (2013) studied 230 patients with tennis elbow and found success rates of 83.9% in the PRP group versus 68.3% in the control group at 24 weeks, with pain improvement of 71.5% in the PRP group versus 56.1% in controls. However, the Cochrane review found moderate-certainty evidence that PRP does not provide patient-important benefits compared with placebo, highlighting the complexity of the evidence base.",
         symptoms: [
@@ -323,7 +323,7 @@ export const bodyAreas: BodyArea[] = [
       {
         slug: "elbow-bursitis",
         name: "Elbow Bursitis & Arthritis",
-        icon: "🔥",
+        icon: "flame",
         description:
           "Elbow bursitis (olecranon bursitis) involves swelling of the fluid-filled sac at the tip of the elbow, causing pain with movement or pressure, and visible swelling. It can result from trauma, prolonged pressure on the elbow, infection, or inflammatory conditions. Elbow arthritis, while less common than in weight-bearing joints, causes pain, swelling, stiffness, and reduced range of motion, sometimes with locking or catching sensations. If the ulnar nerve is affected, numbness in the ring and little fingers may develop. Conservative treatment includes rest, ice, compression, NSAIDs, and physiotherapy. Steroid injections provide short-term relief but have high recurrence rates for elbow conditions. Surgery for tennis elbow includes ECRB release — with a percutaneous approach allowing return to work at 2 weeks versus 15 weeks for open surgery. PRP therapy for elbow conditions targets growth factor delivery to promote tendon regeneration and reduce inflammation.",
         symptoms: [
@@ -348,7 +348,7 @@ export const bodyAreas: BodyArea[] = [
     slug: "hand-wrist-foot-ankle",
     name: "Hand, Wrist, Foot & Ankle Pain",
     shortName: "Extremities",
-    icon: "🤲",
+    icon: "extremities",
     headline: "Understanding Your Hand, Wrist, Foot & Ankle Pain Options",
     subheadline:
       "Take our 2-minute assessment to explore which non-surgical approaches may be suitable for your condition.",
@@ -358,7 +358,7 @@ export const bodyAreas: BodyArea[] = [
       {
         slug: "plantar-fasciitis",
         name: "Plantar Fasciitis",
-        icon: "🦶",
+        icon: "foot",
         description:
           "Plantar fasciitis is one of the most common causes of heel pain, caused by inflammation and degeneration of the plantar fascia — the thick band of tissue connecting the heel bone to the toes. Patients typically experience sharp heel pain with their first steps in the morning that usually improves with movement but returns after prolonged standing. It most commonly affects one foot and is prevalent among runners, people who are overweight, and those who wear shoes with inadequate support. A 2024 systematic review and meta-analysis published in PMC found that PRP is more effective than corticosteroid injections, extracorporeal shockwave therapy, and placebo in reducing pain and improving function for plantar fasciitis. A separate 2022 study comparing PRP to partial plantar fasciotomy surgery found PRP group recovery averaged 10.2 months compared to 37.2 months for the surgical group, with lower complication rates in the PRP cohort.",
         symptoms: [
@@ -374,7 +374,7 @@ export const bodyAreas: BodyArea[] = [
       {
         slug: "trigger-finger",
         name: "Trigger Finger & Hand Conditions",
-        icon: "🤚",
+        icon: "hand",
         description:
           "Trigger finger (stenosing tenosynovitis) occurs when the tendon sheath in a finger becomes inflamed, causing the finger to catch or lock when bent. Patients experience a painful clicking or snapping sensation, stiffness especially in the morning, and sometimes a palpable bump at the base of the affected finger. In severe cases, the finger may become permanently locked. Initial treatment with steroid injection has approximately 90% success rate, with 66.3% of patients needing no further treatment. However, 30.5% require re-injection within 6 months and 3.2% proceed to surgery within 1 year. Hand and wrist osteoarthritis, particularly at the base of the thumb, causes pain, stiffness, reduced grip strength, and difficulty with fine motor tasks. Bony enlargements known as Heberden's and Bouchard's nodes may develop. PRP and regenerative approaches are being studied for their potential to support tendon healing and reduce inflammation in these conditions.",
         symptoms: [
@@ -390,7 +390,7 @@ export const bodyAreas: BodyArea[] = [
       {
         slug: "ankle-tendon",
         name: "Ankle Tendon & Ligament Injuries",
-        icon: "🦶",
+        icon: "foot",
         description:
           "Ankle tendon injuries, particularly Achilles tendinopathy, involve pain and stiffness along the Achilles tendon that is typically worst in the morning and worsens with activity. The tendon may become swollen and thickened. Ankle ligament tears from sprains can lead to chronic instability if not properly rehabilitated. Published research has explored PRP therapy for Achilles tendon conditions, with studies showing improvements in pain intensity and functional ability. One study found that implanting PRP gel into Achilles tears in athletes improved range of motion and function more quickly than open suture repair. Level 4 evidence also showed no reruptures at 2.5 years after open Achilles repair augmented with bone marrow aspirate concentrate. Ankle osteoarthritis, while less common than knee or hip OA, causes pain, stiffness, and reduced range of motion that can significantly affect walking and daily activities. PRP may support healing in soft-tissue ankle injuries.",
         symptoms: [
