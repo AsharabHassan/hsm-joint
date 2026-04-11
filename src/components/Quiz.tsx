@@ -11,6 +11,7 @@ import {
   type QuizAnswers,
   type AnswerWeight,
 } from "@/lib/scoring";
+import { ShieldCheckIcon, ClockIcon, UserIcon, MailIcon, PhoneIcon } from "@/components/ui/Icons";
 
 interface QuizProps {
   bodyAreaSlug: string;
@@ -31,7 +32,7 @@ export function Quiz({ bodyAreaSlug }: QuizProps) {
 
   if (questions.length === 0) return null;
 
-  const totalSteps = questions.length + 1; // +1 for contact form
+  const totalSteps = questions.length + 1;
   const progress =
     state === "results"
       ? 100
@@ -56,7 +57,6 @@ export function Quiz({ bodyAreaSlug }: QuizProps) {
         ...answers,
         [question.id]: { value: option.value, weight: option.weight },
       });
-      // Auto-advance after 300ms
       setTimeout(() => {
         if (currentStep < questions.length - 1) {
           setCurrentStep(currentStep + 1);
@@ -132,44 +132,65 @@ export function Quiz({ bodyAreaSlug }: QuizProps) {
     return <QuizResults score={score} />;
   }
 
+  const totalDots = questions.length;
+  const filledDots =
+    state === "contact" ? totalDots : currentStep + 1;
+
   return (
     <section
       id="quiz"
-      className="bg-gradient-to-br from-gold to-gold-dark py-16 md:py-24"
+      className="relative bg-white py-16 md:py-24 overflow-hidden"
     >
-      <div className="max-w-page mx-auto px-4">
-        <h2 className="font-serif text-h2-mobile lg:text-h2-desktop font-bold text-center text-white mb-2">
-          Discover Your Joint Health Improvement Score
-        </h2>
-        <p className="text-center text-white/80 mb-8 text-sm">
-          Answer 5 quick questions to explore which approaches may be relevant
-          to your situation
-        </p>
+      <div className="relative z-10 max-w-page mx-auto px-4">
+        {/* Section header */}
+        <div className="text-center mb-10">
+          <div className="section-header-label justify-center flex">
+            <div className="gold-line" />
+            <span>Free Assessment</span>
+            <div className="gold-line" />
+          </div>
+          <h2 className="font-serif text-h2-mobile lg:text-h2-desktop font-bold text-charcoal mb-2">
+            Discover Your Improvement Score
+          </h2>
+          <p className="text-slate text-sm max-w-md mx-auto">
+            Answer 5 quick questions to explore which approaches may be relevant
+          </p>
+        </div>
 
         <div className="max-w-quiz mx-auto">
-          <div className="bg-white rounded-2xl p-6 md:p-8 shadow-quiz">
-            {/* Progress bar */}
-            <div className="flex justify-between items-center mb-4">
-              <p className="text-[11px] text-muted">
+          {/* Quiz card */}
+          <div
+            className="bg-[#FDFAF5] rounded-[22px] p-7 md:p-10 shadow-quiz"
+            style={{ animation: "gentleGlow 5s ease-in-out infinite" }}
+          >
+            {/* Step indicator dots */}
+            <div className="flex items-center justify-center gap-2 mb-6">
+              {Array.from({ length: totalDots }).map((_, i) => (
+                <div
+                  key={i}
+                  className={`w-7 h-[5px] rounded-[3px] transition-colors duration-300 ${
+                    i < filledDots ? "bg-charcoal" : "bg-ivory"
+                  }`}
+                />
+              ))}
+            </div>
+
+            {/* Progress row */}
+            <div className="flex justify-between items-center mb-6">
+              <p className="text-[12px] text-slate font-medium">
                 {state === "contact"
                   ? "Almost done"
                   : `Question ${currentStep + 1} of ${questions.length}`}
               </p>
-              <p className="text-[11px] text-gold font-semibold">{progress}%</p>
-            </div>
-            <div className="h-1 bg-ivory rounded-full mb-6">
-              <div
-                className="h-1 bg-gold rounded-full transition-all duration-300"
-                style={{ width: `${progress}%` }}
-              />
+              <p className="text-[12px] text-gold font-bold">{progress}%</p>
             </div>
 
             {state === "questions" && (
               <div>
-                <h3 className="font-serif text-lg font-bold text-charcoal mb-5">
+                <h3 className="font-serif text-[22px] font-bold text-charcoal mb-6">
                   {questions[currentStep].question}
                 </h3>
-                <div className="flex flex-col gap-2">
+                <div className="flex flex-col gap-2.5">
                   {questions[currentStep].options.map((option) => {
                     const currentAnswer = answers[questions[currentStep].id];
                     const isSelected = questions[currentStep].multiSelect
@@ -182,22 +203,22 @@ export function Quiz({ bodyAreaSlug }: QuizProps) {
                       <button
                         key={option.value}
                         onClick={() => selectOption(option)}
-                        className={`flex items-center gap-3 p-3.5 rounded-[10px] border transition-all duration-200 text-left ${
-                          isSelected
-                            ? "bg-gold border-gold text-white"
-                            : "bg-cream border-ivory hover:border-gold/50"
-                        }`}
+                        className={`quiz-option ${isSelected ? "selected" : ""}`}
                       >
+                        {/* Radio circle */}
                         <div
-                          className={`w-5 h-5 rounded-full border-2 shrink-0 flex items-center justify-center ${
-                            isSelected ? "border-white" : "border-gold"
+                          className={`w-[22px] h-[22px] rounded-full border-2 shrink-0 flex items-center justify-center transition-colors ${
+                            isSelected ? "border-charcoal bg-white" : "border-muted/30 bg-white"
                           }`}
                         >
                           {isSelected && (
-                            <div className="w-2.5 h-2.5 rounded-full bg-white" />
+                            <div
+                              className="w-[10px] h-[10px] rounded-full bg-charcoal"
+                              style={{ animation: "scaleIn 0.2s ease-out" }}
+                            />
                           )}
                         </div>
-                        <span className="text-sm font-medium">
+                        <span className="text-sm">
                           {option.label}
                         </span>
                       </button>
@@ -205,8 +226,7 @@ export function Quiz({ bodyAreaSlug }: QuizProps) {
                   })}
                 </div>
 
-                {/* Navigation */}
-                <div className="flex gap-3 mt-6">
+                <div className="flex gap-3 mt-7">
                   {currentStep > 0 && (
                     <Button
                       variant="secondary"
@@ -214,12 +234,12 @@ export function Quiz({ bodyAreaSlug }: QuizProps) {
                       onClick={goBack}
                       className="flex-1"
                     >
-                      ← Back
+                      Back
                     </Button>
                   )}
                   {questions[currentStep].multiSelect && (
                     <Button onClick={goNext} size="sm" className="flex-[2]">
-                      Next →
+                      Next
                     </Button>
                   )}
                 </div>
@@ -228,57 +248,69 @@ export function Quiz({ bodyAreaSlug }: QuizProps) {
 
             {state === "contact" && (
               <form onSubmit={handleSubmit}>
-                <div className="text-center mb-6">
-                  <p className="text-[11px] font-semibold uppercase tracking-[2px] text-gold mb-2">
+                <div className="text-center mb-7">
+                  <div className="w-14 h-14 bg-gold/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <ShieldCheckIcon size={24} className="text-gold" />
+                  </div>
+                  <p className="text-[11px] font-bold uppercase tracking-[2.5px] text-gold mb-2">
                     Your assessment is ready
                   </p>
                   <h3 className="font-serif text-xl font-bold text-charcoal">
                     Where should we send your
                     <br />
-                    Joint Health Improvement Score?
+                    Improvement Score?
                   </h3>
-                  <p className="text-[13px] text-muted mt-2">
+                  <p className="text-[13px] text-slate mt-2">
                     Your personalised report will appear on the next screen
                   </p>
                 </div>
-                <div className="flex flex-col gap-3">
-                  <input
-                    type="text"
-                    placeholder="Full Name"
-                    required
-                    value={contact.name}
-                    onChange={(e) =>
-                      setContact({ ...contact, name: e.target.value })
-                    }
-                    className="bg-cream border border-ivory rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-gold"
-                  />
-                  <input
-                    type="email"
-                    placeholder="Email Address"
-                    required
-                    value={contact.email}
-                    onChange={(e) =>
-                      setContact({ ...contact, email: e.target.value })
-                    }
-                    className="bg-cream border border-ivory rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-gold"
-                  />
-                  <input
-                    type="tel"
-                    placeholder="Phone Number"
-                    required
-                    value={contact.phone}
-                    onChange={(e) =>
-                      setContact({ ...contact, phone: e.target.value })
-                    }
-                    className="bg-cream border border-ivory rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-gold"
-                  />
-                  <Button type="submit" size="lg" disabled={submitting}>
+                <div className="flex flex-col gap-3.5">
+                  <div className="relative">
+                    <UserIcon size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-muted/40" />
+                    <input
+                      type="text"
+                      placeholder="Full Name"
+                      required
+                      value={contact.name}
+                      onChange={(e) =>
+                        setContact({ ...contact, name: e.target.value })
+                      }
+                      className="premium-input w-full pl-11"
+                    />
+                  </div>
+                  <div className="relative">
+                    <MailIcon size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-muted/40" />
+                    <input
+                      type="email"
+                      placeholder="Email Address"
+                      required
+                      value={contact.email}
+                      onChange={(e) =>
+                        setContact({ ...contact, email: e.target.value })
+                      }
+                      className="premium-input w-full pl-11"
+                    />
+                  </div>
+                  <div className="relative">
+                    <PhoneIcon size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-muted/40" />
+                    <input
+                      type="tel"
+                      placeholder="Phone Number"
+                      required
+                      value={contact.phone}
+                      onChange={(e) =>
+                        setContact({ ...contact, phone: e.target.value })
+                      }
+                      className="premium-input w-full pl-11"
+                    />
+                  </div>
+                  <Button type="submit" size="lg" disabled={submitting} className="w-full mt-1">
                     {submitting
                       ? "Processing..."
-                      : "View My Improvement Score →"}
+                      : "View My Improvement Score"}
                   </Button>
                 </div>
-                <p className="text-[11px] text-muted text-center mt-3">
+                <p className="text-[11px] text-muted text-center mt-4 leading-relaxed">
                   By submitting, you agree to receive your educational
                   assessment. No obligation.
                 </p>
@@ -290,11 +322,23 @@ export function Quiz({ bodyAreaSlug }: QuizProps) {
                     onClick={goBack}
                     className="w-full"
                   >
-                    ← Back
+                    Back
                   </Button>
                 </div>
               </form>
             )}
+          </div>
+
+          {/* Trust line below quiz card */}
+          <div className="flex items-center justify-center gap-6 mt-5 text-[12px] text-muted">
+            <span className="flex items-center gap-1.5">
+              <ShieldCheckIcon size={14} className="text-trust-green/60" />
+              GDPR compliant
+            </span>
+            <span className="flex items-center gap-1.5">
+              <ClockIcon size={14} className="text-trust-green/60" />
+              Takes 2 minutes
+            </span>
           </div>
         </div>
       </div>
