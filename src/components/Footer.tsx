@@ -5,36 +5,36 @@ import { Button } from "@/components/ui/Button";
 export function Footer() {
   return (
     <footer className="bg-charcoal text-white/70">
-      <div className="max-w-page mx-auto px-4 py-16">
+      <div className="max-w-page mx-auto px-4 py-16 md:py-20">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
           {/* Column 1: Brand */}
           <div>
-            <h3 className="font-serif text-xl font-bold text-gold mb-4">
+            <h3 className="font-serif text-xl font-bold text-gold mb-4 tracking-tight">
               Harley Street Wellness
             </h3>
-            <p className="text-sm leading-relaxed mb-4">
+            <p className="text-sm leading-relaxed mb-5 text-white/50">
               Educational resources about non-surgical approaches to joint pain.
               GMC-registered specialists providing evidence-based consultations
               at our Harley Street clinic.
             </p>
-            <address className="text-sm not-italic">
+            <address className="text-sm not-italic text-white/40">
               10 Harley Street
               <br />
               London W1G 9PF
             </address>
           </div>
 
-          {/* Column 2: Quick Links */}
+          {/* Column 2: Conditions */}
           <div>
-            <h4 className="font-semibold text-white mb-4 text-sm uppercase tracking-wider">
+            <h4 className="font-semibold text-white/90 mb-5 text-xs uppercase tracking-[2px]">
               Conditions
             </h4>
-            <ul className="space-y-2">
+            <ul className="space-y-2.5">
               {bodyAreas.map((area) => (
                 <li key={area.slug}>
                   <Link
                     href={`/${area.slug}`}
-                    className="text-sm hover:text-gold transition-colors"
+                    className="text-sm text-white/40 hover:text-gold transition-colors duration-200"
                   >
                     {area.name}
                   </Link>
@@ -45,11 +45,11 @@ export function Footer() {
 
           {/* Column 3: Contact */}
           <div>
-            <h4 className="font-semibold text-white mb-4 text-sm uppercase tracking-wider">
+            <h4 className="font-semibold text-white/90 mb-5 text-xs uppercase tracking-[2px]">
               Contact
             </h4>
-            <p className="text-sm mb-2">Phone: +44 20 XXXX XXXX</p>
-            <p className="text-sm mb-6">
+            <p className="text-sm mb-2 text-white/40">Phone: +44 20 XXXX XXXX</p>
+            <p className="text-sm mb-6 text-white/40">
               Email: info@harleystreetmedicalwellness.co.uk
             </p>
             <Button variant="outline" size="sm">
@@ -60,9 +60,9 @@ export function Footer() {
       </div>
 
       {/* Disclaimers */}
-      <div className="border-t border-white/10">
+      <div className="border-t border-white/5">
         <div className="max-w-page mx-auto px-4 py-8">
-          <div className="space-y-4 text-[11px] text-white/40 leading-relaxed">
+          <div className="space-y-3 text-[11px] text-white/25 leading-relaxed">
             <p>
               The information on this page is provided for educational and
               informational purposes only and does not constitute medical advice.
@@ -92,8 +92,8 @@ export function Footer() {
               whether any approach may be appropriate.
             </p>
           </div>
-          <div className="mt-8 pt-4 border-t border-white/10 text-[11px] text-white/30 text-center">
-            © {new Date().getFullYear()} Harley Street Wellness. All rights
+          <div className="mt-8 pt-4 border-t border-white/5 text-[11px] text-white/20 text-center">
+            &copy; {new Date().getFullYear()} Harley Street Wellness. All rights
             reserved.
           </div>
         </div>

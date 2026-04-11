@@ -9,16 +9,17 @@ import {
   generateMedicalClinicSchema,
 } from "@/lib/schema";
 import { Hero } from "@/components/Hero";
+import { Quiz } from "@/components/Quiz";
 import { SocialProof } from "@/components/SocialProof";
 import { StatsSection } from "@/components/StatsSection";
 import { ConditionCards } from "@/components/ConditionCards";
 import { TraditionalRisks } from "@/components/TraditionalRisks";
 import { ComparisonTable } from "@/components/ComparisonTable";
 import { TreatmentCards } from "@/components/TreatmentCards";
-import { Quiz } from "@/components/Quiz";
 import { Testimonials } from "@/components/Testimonials";
 import { LocationTrust } from "@/components/LocationTrust";
 import { FAQ } from "@/components/FAQ";
+import { BottomCTA } from "@/components/BottomCTA";
 
 export function generateStaticParams() {
   return getAllBodyAreaSlugs().map((slug) => ({ bodyArea: slug }));
@@ -74,6 +75,7 @@ export default async function BodyAreaPage({
         }}
       />
       <Hero bodyArea={bodyArea} />
+      <Quiz bodyAreaSlug={slug} />
       <SocialProof />
       <StatsSection bodyAreaSlug={slug} />
       <ConditionCards
@@ -83,10 +85,10 @@ export default async function BodyAreaPage({
       <TraditionalRisks bodyArea={bodyArea} />
       <ComparisonTable />
       <TreatmentCards bodyAreaName={bodyArea.name} />
-      <Quiz bodyAreaSlug={slug} />
       <Testimonials />
       <LocationTrust />
       <FAQ bodyAreaSlug={slug} bodyAreaName={bodyArea.name} />
+      <BottomCTA />
     </>
   );
 }
