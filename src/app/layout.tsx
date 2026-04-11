@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
-import { Playfair_Display, Inter } from "next/font/google";
+import { Playfair_Display, DM_Sans } from "next/font/google";
 import "../styles/globals.css";
 import { Nav } from "@/components/Nav";
-import { TrustBar } from "@/components/TrustBar";
+// import { TrustMarquee } from "@/components/TrustMarquee"; // Task 2
 import { Footer } from "@/components/Footer";
 import { StickyCtaBar } from "@/components/StickyCtaBar";
+import { ScrollProgress } from "@/components/ui/ScrollProgress";
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -13,9 +14,10 @@ const playfair = Playfair_Display({
   display: "swap",
 });
 
-const inter = Inter({
+const dmSans = DM_Sans({
   subsets: ["latin"],
-  variable: "--font-inter",
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-dm-sans",
   display: "swap",
 });
 
@@ -31,13 +33,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${playfair.variable} ${inter.variable}`}>
+    <html lang="en" className={`${playfair.variable} ${dmSans.variable}`}>
       <head>
         <link rel="icon" href="/favicon.ico" />
       </head>
       <body>
+        <ScrollProgress />
         <Nav />
-        <TrustBar />
+        {/* TrustMarquee goes here — Task 2 */}
         <main>{children}</main>
         <Footer />
         <StickyCtaBar />
