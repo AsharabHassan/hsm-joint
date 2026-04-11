@@ -1,0 +1,52 @@
+@import "tailwindcss";
+
+@theme {
+  --color-gold: #D4A843;
+  --color-gold-dark: #B8912E;
+  --color-cream: #FAF8F3;
+  --color-ivory: #F5F0E8;
+  --color-charcoal: #2C2C2C;
+  --color-trust-green: #1A6B4A;
+  --color-muted: #888888;
+
+  --font-serif: "Playfair Display", Georgia, serif;
+  --font-sans: "Inter", system-ui, sans-serif;
+
+  --shadow-card: 0 1px 3px rgba(0,0,0,0.06);
+  --shadow-cta: 0 4px 12px rgba(212,168,67,0.3);
+  --shadow-quiz: 0 8px 32px rgba(0,0,0,0.06);
+  --shadow-sticky: 0 -4px 20px rgba(0,0,0,0.08);
+
+  --radius-card: 12px;
+  --radius-button: 10px;
+  --radius-pill: 20px;
+
+  --width-page: 1200px;
+  --width-quiz: 480px;
+}
+
+@layer base {
+  body {
+    @apply bg-cream text-charcoal font-sans;
+    font-size: 16px;
+    line-height: 1.7;
+  }
+
+  h1, h2, h3 {
+    @apply font-serif;
+  }
+
+  @media (min-width: 1024px) {
+    body {
+      font-size: 18px;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
