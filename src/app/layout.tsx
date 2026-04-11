@@ -1,18 +1,21 @@
 import type { Metadata } from "next";
 import { Playfair_Display, Inter } from "next/font/google";
 import "../styles/globals.css";
+import { Nav } from "@/components/Nav";
+import { TrustBar } from "@/components/TrustBar";
+import { Footer } from "@/components/Footer";
+import { StickyCtaBar } from "@/components/StickyCtaBar";
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
   weight: ["400", "600", "700"],
-  variable: "--font-serif",
+  variable: "--font-playfair",
   display: "swap",
 });
 
 const inter = Inter({
   subsets: ["latin"],
-  weight: ["400", "600", "700"],
-  variable: "--font-sans",
+  variable: "--font-inter",
   display: "swap",
 });
 
@@ -32,7 +35,13 @@ export default function RootLayout({
       <head>
         <link rel="icon" href="/favicon.ico" />
       </head>
-      <body>{children}</body>
+      <body>
+        <Nav />
+        <TrustBar />
+        <main>{children}</main>
+        <Footer />
+        <StickyCtaBar />
+      </body>
     </html>
   );
 }
