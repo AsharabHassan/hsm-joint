@@ -1,7 +1,7 @@
 import type { Condition } from "@/data/bodyAreas";
 import { Card } from "@/components/ui/Card";
-import { AccordionItem } from "@/components/ui/Accordion";
 import { FadeIn } from "@/components/ui/FadeIn";
+import { ConditionIcon } from "@/components/ui/ConditionIcon";
 
 interface ConditionCardsProps {
   conditions: Condition[];
@@ -13,31 +13,71 @@ export function ConditionCards({
   bodyAreaName,
 }: ConditionCardsProps) {
   return (
-    <section className="bg-ivory py-16 md:py-24">
+    <section className="bg-cream py-20 md:py-28">
       <div className="max-w-page mx-auto px-4">
         <FadeIn>
-          <h2 className="font-serif text-h2-mobile lg:text-h2-desktop font-bold text-center mb-12">
-            What Causes {bodyAreaName}?
-          </h2>
+          <div className="text-center mb-14">
+            <div className="section-header-label">
+              <div className="gold-line" />
+              <span>Conditions</span>
+              <div className="gold-line" />
+            </div>
+            <h2 className="font-serif text-h2-mobile lg:text-h2-desktop font-bold mb-3">
+              What Causes {bodyAreaName}?
+            </h2>
+            <p className="text-sm text-slate max-w-lg mx-auto">
+              Understanding your condition is the first step toward the right treatment
+            </p>
+          </div>
         </FadeIn>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
           {conditions.map((condition, i) => (
             <FadeIn key={condition.slug} delay={i * 100}>
-              <Card>
-                <div className="w-10 h-10 bg-ivory rounded-[10px] flex items-center justify-center mb-4 text-xl">
-                  {condition.icon}
+              <Card variant="shimmer" hover className="h-full flex flex-col">
+                {/* Icon */}
+                <div
+                  className="w-[52px] h-[52px] rounded-[16px] flex items-center justify-center mb-5"
+                  style={{
+                    background:
+                      "linear-gradient(135deg, rgba(200,169,110,0.12) 0%, rgba(200,169,110,0.04) 100%)",
+                  }}
+                >
+                  <ConditionIcon
+                    iconKey={condition.icon}
+                    size={22}
+                    className="text-gold"
+                  />
                 </div>
-                <h3 className="font-serif text-h3-mobile lg:text-h3-desktop font-bold mb-3">
+
+                {/* Heading */}
+                <h3
+                  className="font-serif font-bold mb-3"
+                  style={{ fontSize: "19px", lineHeight: 1.3 }}
+                >
                   {condition.name}
                 </h3>
-                <p className="text-sm text-charcoal/80 leading-relaxed mb-4">
+
+                {/* Description */}
+                <p className="text-[13px] text-slate leading-relaxed mb-4 flex-1">
                   {condition.description}
                 </p>
-                <div className="border-t border-ivory pt-4">
-                  <AccordionItem
-                    question="Common symptoms"
-                    answer={condition.symptoms.join(" • ")}
-                  />
+
+                {/* Symptom pills */}
+                <div className="border-t border-ivory pt-4 mt-4">
+                  <p className="text-[10px] font-semibold text-muted uppercase tracking-wider mb-2.5">
+                    Common symptoms
+                  </p>
+                  <div className="flex flex-wrap gap-1.5">
+                    {condition.symptoms.slice(0, 4).map((symptom) => (
+                      <span
+                        key={symptom}
+                        className="text-[10px] px-3 py-1.5 bg-[#F6F1E7] rounded-pill text-muted font-medium"
+                      >
+                        {symptom}
+                      </span>
+                    ))}
+                  </div>
                 </div>
               </Card>
             </FadeIn>

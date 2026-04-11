@@ -1,4 +1,5 @@
 import { FadeIn } from "@/components/ui/FadeIn";
+import { CheckCircleIcon } from "@/components/ui/Icons";
 
 const comparisonData = [
   {
@@ -59,33 +60,75 @@ const comparisonData = [
   },
 ];
 
+const positiveValues = new Set([
+  "None (outpatient)",
+  "Minimal (<0.1%)",
+  "Minimal (0.7% SAE)",
+  "Minimal",
+  "Non-invasive",
+  "Yes",
+  "Local / none",
+  "Local",
+]);
+
+function isPositive(val: string) {
+  return positiveValues.has(val);
+}
+
 export function ComparisonTable() {
   return (
-    <section className="bg-ivory py-16 md:py-24">
-      <div className="max-w-page mx-auto px-4">
+    <section className="relative bg-charcoal py-20 md:py-28 noise-overlay overflow-hidden">
+      {/* Decorative orbs */}
+      <div
+        className="absolute top-0 right-0 w-[480px] h-[480px] rounded-full pointer-events-none"
+        style={{
+          background:
+            "radial-gradient(circle, rgba(200,169,110,0.07) 0%, transparent 70%)",
+        }}
+      />
+      <div
+        className="absolute bottom-0 left-0 w-[360px] h-[360px] rounded-full pointer-events-none"
+        style={{
+          background:
+            "radial-gradient(circle, rgba(26,107,74,0.06) 0%, transparent 70%)",
+        }}
+      />
+
+      <div className="relative z-10 max-w-page mx-auto px-4">
         <FadeIn>
-          <h2 className="font-serif text-h2-mobile lg:text-h2-desktop font-bold text-center mb-12">
-            How Do Non-Surgical Approaches Compare to Surgery?
-          </h2>
+          <div className="text-center mb-14">
+            <div className="section-header-label">
+              <div className="gold-line" style={{ opacity: 0.5 }} />
+              <span style={{ color: "#C8A96E" }}>Side-by-Side</span>
+              <div className="gold-line" style={{ opacity: 0.5 }} />
+            </div>
+            <h2 className="font-serif text-h2-mobile lg:text-h2-desktop font-bold text-white mb-3">
+              How Do Non-Surgical Approaches Compare?
+            </h2>
+            <p className="text-sm text-white/50 max-w-lg mx-auto">
+              A side-by-side comparison of traditional surgery versus regenerative options
+            </p>
+          </div>
         </FadeIn>
+
         <FadeIn delay={200}>
           <div className="overflow-x-auto -mx-4 px-4">
-            <table className="w-full min-w-[600px] border-collapse text-sm">
+            <table className="w-full min-w-[640px] border-collapse text-sm">
               <thead>
-                <tr className="border-b-2 border-gold">
-                  <th className="text-left py-3 px-4 font-semibold text-gold">
+                <tr>
+                  <th className="text-left py-4 px-5 font-semibold text-gold text-[10px] uppercase tracking-[2px]">
                     Factor
                   </th>
-                  <th className="text-left py-3 px-4 font-semibold text-gold">
+                  <th className="text-left py-4 px-5 font-semibold text-white/25 text-[10px] uppercase tracking-[2px]">
                     Surgery
                   </th>
-                  <th className="text-left py-3 px-4 font-semibold text-gold">
+                  <th className="text-left py-4 px-5 font-semibold text-gold text-[10px] uppercase tracking-[2px]">
                     PRP Therapy
                   </th>
-                  <th className="text-left py-3 px-4 font-semibold text-gold">
+                  <th className="text-left py-4 px-5 font-semibold text-gold text-[10px] uppercase tracking-[2px]">
                     Exosome Therapy
                   </th>
-                  <th className="text-left py-3 px-4 font-semibold text-gold">
+                  <th className="text-left py-4 px-5 font-semibold text-gold text-[10px] uppercase tracking-[2px]">
                     Stem Cell Therapy
                   </th>
                 </tr>
@@ -94,22 +137,64 @@ export function ComparisonTable() {
                 {comparisonData.map((row, i) => (
                   <tr
                     key={row.factor}
-                    className={`border-b border-ivory ${
-                      i % 2 === 0 ? "bg-white" : "bg-ivory/50"
+                    className={`border-b border-white/[0.04] ${
+                      i % 2 === 0 ? "bg-white/[0.01]" : ""
                     }`}
                   >
-                    <td className="py-3 px-4 font-semibold text-charcoal">
+                    <td className="py-3.5 px-5 font-semibold text-white/85 text-[13px]">
                       {row.factor}
                     </td>
-                    <td className="py-3 px-4 text-charcoal/70">
+                    <td className="py-3.5 px-5 text-white/25 text-[13px]">
                       {row.surgery}
                     </td>
-                    <td className="py-3 px-4 text-charcoal/70">{row.prp}</td>
-                    <td className="py-3 px-4 text-charcoal/70">
-                      {row.exosomes}
+                    <td className="py-3.5 px-5 text-[13px]">
+                      <span
+                        className={`inline-flex items-center gap-1.5 ${
+                          isPositive(row.prp)
+                            ? "font-medium"
+                            : "text-white/60"
+                        }`}
+                        style={
+                          isPositive(row.prp) ? { color: "#4ADE80" } : undefined
+                        }
+                      >
+                        <CheckCircleIcon size={14} className="shrink-0" />
+                        {row.prp}
+                      </span>
                     </td>
-                    <td className="py-3 px-4 text-charcoal/70">
-                      {row.stemCells}
+                    <td className="py-3.5 px-5 text-[13px]">
+                      <span
+                        className={`inline-flex items-center gap-1.5 ${
+                          isPositive(row.exosomes)
+                            ? "font-medium"
+                            : "text-white/60"
+                        }`}
+                        style={
+                          isPositive(row.exosomes)
+                            ? { color: "#4ADE80" }
+                            : undefined
+                        }
+                      >
+                        <CheckCircleIcon size={14} className="shrink-0" />
+                        {row.exosomes}
+                      </span>
+                    </td>
+                    <td className="py-3.5 px-5 text-[13px]">
+                      <span
+                        className={`inline-flex items-center gap-1.5 ${
+                          isPositive(row.stemCells)
+                            ? "font-medium"
+                            : "text-white/60"
+                        }`}
+                        style={
+                          isPositive(row.stemCells)
+                            ? { color: "#4ADE80" }
+                            : undefined
+                        }
+                      >
+                        <CheckCircleIcon size={14} className="shrink-0" />
+                        {row.stemCells}
+                      </span>
                     </td>
                   </tr>
                 ))}
