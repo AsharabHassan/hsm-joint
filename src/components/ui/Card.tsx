@@ -1,24 +1,30 @@
 import { type HTMLAttributes } from "react";
 
 interface CardProps extends HTMLAttributes<HTMLDivElement> {
-  variant?: "default" | "highlighted" | "ivory";
+  variant?: "default" | "highlighted" | "shimmer";
+  hover?: boolean;
 }
 
 export function Card({
   variant = "default",
+  hover = true,
   className = "",
   children,
   ...props
 }: CardProps) {
+  const base = "rounded-card bg-white border border-black/[0.04]";
+
   const variants = {
-    default: "bg-white border border-ivory shadow-card",
-    highlighted: "bg-white border-2 border-gold shadow-card",
-    ivory: "bg-ivory border border-ivory",
+    default: "shadow-card",
+    highlighted: "shadow-card border-2 border-gold",
+    shimmer: "shadow-card card-shimmer overflow-hidden",
   };
+
+  const hoverClass = hover ? "hover-lift" : "";
 
   return (
     <div
-      className={`rounded-card p-5 md:p-6 ${variants[variant]} ${className}`}
+      className={`${base} ${variants[variant]} ${hoverClass} p-7 md:p-8 ${className}`}
       {...props}
     >
       {children}

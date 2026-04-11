@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Playfair_Display, DM_Sans } from "next/font/google";
 import "../styles/globals.css";
 import { Nav } from "@/components/Nav";
-// import { TrustMarquee } from "@/components/TrustMarquee"; // Task 2
+import { TrustMarquee } from "@/components/TrustMarquee";
 import { Footer } from "@/components/Footer";
 import { StickyCtaBar } from "@/components/StickyCtaBar";
 import { ScrollProgress } from "@/components/ui/ScrollProgress";
@@ -40,7 +40,7 @@ export default function RootLayout({
       <body>
         <ScrollProgress />
         <Nav />
-        {/* TrustMarquee goes here — Task 2 */}
+        <TrustMarquee />
         <main>{children}</main>
         <Footer />
         <StickyCtaBar />

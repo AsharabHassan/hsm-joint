@@ -12,20 +12,18 @@ export function Button({
   children,
   ...props
 }: ButtonProps) {
-  const base =
-    "font-sans font-bold rounded-button transition-all duration-200 hover:scale-[1.02] active:scale-[0.98]";
+  const base = "font-sans font-bold rounded-button inline-flex items-center justify-center gap-2.5 cursor-pointer";
 
   const variants = {
-    primary: "bg-gold text-white shadow-cta hover:bg-gold-dark",
-    secondary: "bg-ivory text-muted hover:bg-cream",
-    outline:
-      "bg-transparent border-2 border-gold text-gold hover:bg-gold hover:text-white",
+    primary: "mag-btn bg-charcoal text-white shadow-cta",
+    secondary: "bg-ivory text-charcoal-light hover:bg-[#E8DFD0] active:scale-[0.97] transition-all duration-200",
+    outline: "bg-transparent border-2 border-gold text-gold hover:bg-gold hover:text-white active:scale-[0.97] transition-all duration-200",
   };
 
   const sizes = {
-    sm: "px-4 py-2 text-sm",
-    md: "px-6 py-3 text-[15px]",
-    lg: "px-8 py-4 text-base",
+    sm: "px-5 py-2.5 text-[13px]",
+    md: "px-7 py-3.5 text-[14px]",
+    lg: "px-8 py-4 text-[15px] tracking-wide",
   };
 
   return (
