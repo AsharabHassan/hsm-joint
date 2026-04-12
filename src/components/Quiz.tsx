@@ -2,16 +2,23 @@
 
 import { useState } from "react";
 import { Button } from "@/components/ui/Button";
+import { NrsSlider } from "@/components/NrsSlider";
 import { QuizResults } from "@/components/QuizResults";
 import { getQuizConfig, type QuizOption } from "@/data/quizQuestions";
 import {
   calculateScore,
   getScoreLabel,
-  getMatchedTreatment,
+  getTreatmentMatchLabels,
   type QuizAnswers,
   type AnswerWeight,
 } from "@/lib/scoring";
-import { ShieldCheckIcon, ClockIcon, UserIcon, MailIcon, PhoneIcon } from "@/components/ui/Icons";
+import {
+  ShieldCheckIcon,
+  ClockIcon,
+  UserIcon,
+  MailIcon,
+  PhoneIcon,
+} from "@/components/ui/Icons";
 
 interface QuizProps {
   bodyAreaSlug: string;
@@ -24,7 +31,9 @@ export function Quiz({ bodyAreaSlug }: QuizProps) {
   const questions = config?.questions ?? [];
 
   const [currentStep, setCurrentStep] = useState(0);
-  const [answers, setAnswers] = useState<Record<string, AnswerWeight | AnswerWeight[]>>({});
+  const [answers, setAnswers] = useState<
+    Record<string, AnswerWeight | AnswerWeight[] | number>
+  >({});
   const [state, setState] = useState<QuizState>("questions");
   const [contact, setContact] = useState({ name: "", email: "", phone: "" });
   const [score, setScore] = useState(0);
@@ -37,13 +46,14 @@ export function Quiz({ bodyAreaSlug }: QuizProps) {
     state === "results"
       ? 100
       : Math.round(
-          ((state === "contact" ? questions.length : currentStep) / totalSteps) *
+          ((state === "contact" ? questions.length : currentStep) /
+            totalSteps) *
             100
         );
 
   function selectOption(option: QuizOption) {
     const question = questions[currentStep];
-    if (question.multiSelect) {
+    if (question.type === "multi") {
       const existing = (answers[question.id] as AnswerWeight[]) || [];
       const isSelected = existing.some((a) => a.value === option.value);
       setAnswers({
@@ -67,6 +77,18 @@ export function Quiz({ bodyAreaSlug }: QuizProps) {
     }
   }
 
+  function handleNrsChange(value: number) {
+    const question = questions[currentStep];
+    setAnswers({ ...answers, [question.id]: value });
+    setTimeout(() => {
+      if (currentStep < questions.length - 1) {
+        setCurrentStep(currentStep + 1);
+      } else {
+        setState("contact");
+      }
+    }, 400);
+  }
+
   function goNext() {
     if (currentStep < questions.length - 1) {
       setCurrentStep(currentStep + 1);
@@ -84,20 +106,36 @@ export function Quiz({ bodyAreaSlug }: QuizProps) {
     }
   }
 
+  function canProceed(): boolean {
+    const question = questions[currentStep];
+    const answer = answers[question.id];
+    if (question.type === "nrs") return typeof answer === "number";
+    if (question.type === "multi")
+      return Array.isArray(answer) && answer.length > 0;
+    return answer !== undefined;
+  }
+
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setSubmitting(true);
 
     const quizAnswers: QuizAnswers = {
       painLocation: answers["pain-location"] as AnswerWeight,
+      painIntensity: answers["pain-intensity"] as number,
+      stiffness: answers["stiffness"] as AnswerWeight,
+      functionalImpact:
+        (answers["functional-impact"] as AnswerWeight[]) || [],
       duration: answers["duration"] as AnswerWeight,
-      dailyImpact: answers["daily-impact"] as AnswerWeight,
-      previousTreatments: (answers["previous-treatments"] as AnswerWeight[]) || [],
+      previousTreatments:
+        (answers["previous-treatments"] as AnswerWeight[]) || [],
+      ageRange: answers["age-range"] as AnswerWeight,
       primaryGoal: answers["primary-goal"] as AnswerWeight,
     };
 
     const calculatedScore = calculateScore(quizAnswers);
     setScore(calculatedScore);
+
+    const matchLabels = getTreatmentMatchLabels(calculatedScore);
 
     try {
       await fetch("/api/quiz-submit", {
@@ -108,16 +146,25 @@ export function Quiz({ bodyAreaSlug }: QuizProps) {
           bodyArea: bodyAreaSlug,
           answers: {
             painLocation: (answers["pain-location"] as AnswerWeight)?.value,
+            painIntensity: answers["pain-intensity"] as number,
+            stiffness: (answers["stiffness"] as AnswerWeight)?.value,
+            functionalImpact: (
+              (answers["functional-impact"] as AnswerWeight[]) || []
+            ).map((a) => a.value),
             duration: (answers["duration"] as AnswerWeight)?.value,
-            dailyImpact: (answers["daily-impact"] as AnswerWeight)?.value,
-            previousTreatments: ((answers["previous-treatments"] as AnswerWeight[]) || []).map(
-              (a) => a.value
-            ),
+            previousTreatments: (
+              (answers["previous-treatments"] as AnswerWeight[]) || []
+            ).map((a) => a.value),
+            ageRange: (answers["age-range"] as AnswerWeight)?.value,
             primaryGoal: (answers["primary-goal"] as AnswerWeight)?.value,
           },
           score: calculatedScore,
           scoreLabel: getScoreLabel(calculatedScore),
-          matchedTreatment: getMatchedTreatment(calculatedScore),
+          matchedTreatments: {
+            cortisone: matchLabels["cortisone"],
+            hyaluronicAcid: matchLabels["hyaluronic-acid"],
+            advancedOptions: matchLabels["advanced-options"],
+          },
         }),
       });
     } catch {
@@ -133,8 +180,8 @@ export function Quiz({ bodyAreaSlug }: QuizProps) {
   }
 
   const totalDots = questions.length;
-  const filledDots =
-    state === "contact" ? totalDots : currentStep + 1;
+  const filledDots = state === "contact" ? totalDots : currentStep + 1;
+  const currentQuestion = questions[currentStep];
 
   return (
     <section
@@ -153,7 +200,7 @@ export function Quiz({ bodyAreaSlug }: QuizProps) {
             Discover Your Improvement Score
           </h2>
           <p className="text-slate text-sm max-w-md mx-auto">
-            Answer 5 quick questions to explore which approaches may be relevant
+            Answer 8 quick questions to explore which approaches may be relevant
           </p>
         </div>
 
@@ -188,43 +235,64 @@ export function Quiz({ bodyAreaSlug }: QuizProps) {
             {state === "questions" && (
               <div>
                 <h3 className="font-serif text-[22px] font-bold text-charcoal mb-6">
-                  {questions[currentStep].question}
+                  {currentQuestion.question}
                 </h3>
-                <div className="flex flex-col gap-2.5">
-                  {questions[currentStep].options.map((option) => {
-                    const currentAnswer = answers[questions[currentStep].id];
-                    const isSelected = questions[currentStep].multiSelect
-                      ? (currentAnswer as AnswerWeight[])?.some(
-                          (a) => a.value === option.value
-                        )
-                      : (currentAnswer as AnswerWeight)?.value === option.value;
 
-                    return (
-                      <button
-                        key={option.value}
-                        onClick={() => selectOption(option)}
-                        className={`quiz-option ${isSelected ? "selected" : ""}`}
-                      >
-                        {/* Radio circle */}
-                        <div
-                          className={`w-[22px] h-[22px] rounded-full border-2 shrink-0 flex items-center justify-center transition-colors ${
-                            isSelected ? "border-charcoal bg-white" : "border-muted/30 bg-white"
-                          }`}
-                        >
-                          {isSelected && (
+                {/* NRS slider for pain intensity */}
+                {currentQuestion.type === "nrs" && currentQuestion.nrsConfig && (
+                  <NrsSlider
+                    config={currentQuestion.nrsConfig}
+                    value={
+                      typeof answers[currentQuestion.id] === "number"
+                        ? (answers[currentQuestion.id] as number)
+                        : null
+                    }
+                    onChange={handleNrsChange}
+                  />
+                )}
+
+                {/* Standard options for single/multi */}
+                {currentQuestion.type !== "nrs" &&
+                  currentQuestion.options && (
+                    <div className="flex flex-col gap-2.5">
+                      {currentQuestion.options.map((option) => {
+                        const currentAnswer = answers[currentQuestion.id];
+                        const isSelected =
+                          currentQuestion.type === "multi"
+                            ? (currentAnswer as AnswerWeight[])?.some(
+                                (a) => a.value === option.value
+                              )
+                            : (currentAnswer as AnswerWeight)?.value ===
+                              option.value;
+
+                        return (
+                          <button
+                            key={option.value}
+                            onClick={() => selectOption(option)}
+                            className={`quiz-option ${isSelected ? "selected" : ""}`}
+                          >
                             <div
-                              className="w-[10px] h-[10px] rounded-full bg-charcoal"
-                              style={{ animation: "scaleIn 0.2s ease-out" }}
-                            />
-                          )}
-                        </div>
-                        <span className="text-sm">
-                          {option.label}
-                        </span>
-                      </button>
-                    );
-                  })}
-                </div>
+                              className={`w-[22px] h-[22px] rounded-full border-2 shrink-0 flex items-center justify-center transition-colors ${
+                                isSelected
+                                  ? "border-charcoal bg-white"
+                                  : "border-muted/30 bg-white"
+                              }`}
+                            >
+                              {isSelected && (
+                                <div
+                                  className="w-[10px] h-[10px] rounded-full bg-charcoal"
+                                  style={{
+                                    animation: "scaleIn 0.2s ease-out",
+                                  }}
+                                />
+                              )}
+                            </div>
+                            <span className="text-sm">{option.label}</span>
+                          </button>
+                        );
+                      })}
+                    </div>
+                  )}
 
                 <div className="flex gap-3 mt-7">
                   {currentStep > 0 && (
@@ -237,8 +305,15 @@ export function Quiz({ bodyAreaSlug }: QuizProps) {
                       Back
                     </Button>
                   )}
-                  {questions[currentStep].multiSelect && (
-                    <Button onClick={goNext} size="sm" className="flex-[2]">
+                  {(currentQuestion.type === "multi" ||
+                    (currentQuestion.type === "nrs" &&
+                      typeof answers[currentQuestion.id] === "number")) && (
+                    <Button
+                      onClick={goNext}
+                      size="sm"
+                      className="flex-[2]"
+                      disabled={!canProceed()}
+                    >
                       Next
                     </Button>
                   )}
@@ -266,7 +341,10 @@ export function Quiz({ bodyAreaSlug }: QuizProps) {
                 </div>
                 <div className="flex flex-col gap-3.5">
                   <div className="relative">
-                    <UserIcon size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-muted/40" />
+                    <UserIcon
+                      size={16}
+                      className="absolute left-4 top-1/2 -translate-y-1/2 text-muted/40"
+                    />
                     <input
                       type="text"
                       placeholder="Full Name"
@@ -279,7 +357,10 @@ export function Quiz({ bodyAreaSlug }: QuizProps) {
                     />
                   </div>
                   <div className="relative">
-                    <MailIcon size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-muted/40" />
+                    <MailIcon
+                      size={16}
+                      className="absolute left-4 top-1/2 -translate-y-1/2 text-muted/40"
+                    />
                     <input
                       type="email"
                       placeholder="Email Address"
@@ -292,7 +373,10 @@ export function Quiz({ bodyAreaSlug }: QuizProps) {
                     />
                   </div>
                   <div className="relative">
-                    <PhoneIcon size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-muted/40" />
+                    <PhoneIcon
+                      size={16}
+                      className="absolute left-4 top-1/2 -translate-y-1/2 text-muted/40"
+                    />
                     <input
                       type="tel"
                       placeholder="Phone Number"
@@ -304,10 +388,13 @@ export function Quiz({ bodyAreaSlug }: QuizProps) {
                       className="premium-input w-full pl-11"
                     />
                   </div>
-                  <Button type="submit" size="lg" disabled={submitting} className="w-full mt-1">
-                    {submitting
-                      ? "Processing..."
-                      : "View My Improvement Score"}
+                  <Button
+                    type="submit"
+                    size="lg"
+                    disabled={submitting}
+                    className="w-full mt-1"
+                  >
+                    {submitting ? "Processing..." : "View My Improvement Score"}
                   </Button>
                 </div>
                 <p className="text-[11px] text-muted text-center mt-4 leading-relaxed">
@@ -337,7 +424,7 @@ export function Quiz({ bodyAreaSlug }: QuizProps) {
             </span>
             <span className="flex items-center gap-1.5">
               <ClockIcon size={14} className="text-trust-green/60" />
-              Takes 2 minutes
+              Takes 3 minutes
             </span>
           </div>
         </div>
