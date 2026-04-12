@@ -3,8 +3,14 @@
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
-import { treatments } from "@/data/treatments";
-import { getScoreLabel, getTreatmentMatchLabels } from "@/lib/scoring";
+import { getAdSafeTreatments } from "@/data/treatments";
+import {
+  getScoreLabel,
+  getScoreDescription,
+  getTreatmentMatchLabels,
+  getMatchLabelDisplay,
+  type MatchLevel,
+} from "@/lib/scoring";
 import { CheckCircleIcon, ShieldCheckIcon } from "@/components/ui/Icons";
 
 interface QuizResultsProps {
@@ -14,7 +20,9 @@ interface QuizResultsProps {
 export function QuizResults({ score }: QuizResultsProps) {
   const [displayScore, setDisplayScore] = useState(0);
   const scoreLabel = getScoreLabel(score);
+  const scoreDescription = getScoreDescription(score);
   const matchLabels = getTreatmentMatchLabels(score);
+  const adSafeTreatments = getAdSafeTreatments();
 
   useEffect(() => {
     const duration = 2000;
@@ -30,12 +38,6 @@ export function QuizResults({ score }: QuizResultsProps) {
 
     requestAnimationFrame(animate);
   }, [score]);
-
-  const matchLabelStyles: Record<string, { bg: string; text: string; label: string }> = {
-    best: { bg: "bg-gold", text: "text-white", label: "Best Match" },
-    good: { bg: "bg-trust-green-light", text: "text-trust-green", label: "Good Match" },
-    explore: { bg: "bg-ivory", text: "text-slate", label: "Worth Exploring" },
-  };
 
   return (
     <section className="bg-cream py-20 md:py-28">
@@ -53,7 +55,10 @@ export function QuizResults({ score }: QuizResultsProps) {
 
           {/* Score gauge */}
           <div className="relative w-40 h-40 mx-auto mb-5">
-            <svg className="w-full h-full -rotate-90" viewBox="0 0 120 120">
+            <svg
+              className="w-full h-full -rotate-90"
+              viewBox="0 0 120 120"
+            >
               <circle
                 cx="60"
                 cy="60"
@@ -74,7 +79,13 @@ export function QuizResults({ score }: QuizResultsProps) {
                 className="transition-all duration-100"
               />
               <defs>
-                <linearGradient id="scoreGradient" x1="0" y1="0" x2="1" y2="1">
+                <linearGradient
+                  id="scoreGradient"
+                  x1="0"
+                  y1="0"
+                  x2="1"
+                  y2="1"
+                >
                   <stop offset="0%" stopColor="#1A6B4A" />
                   <stop offset="100%" stopColor="#C8A96E" />
                 </linearGradient>
@@ -84,15 +95,15 @@ export function QuizResults({ score }: QuizResultsProps) {
               <span className="font-serif text-4xl font-extrabold text-trust-green tracking-tight">
                 {displayScore}
               </span>
-              <span className="text-[11px] text-muted font-medium">out of 100</span>
+              <span className="text-[11px] text-muted font-medium">
+                out of 100
+              </span>
             </div>
           </div>
 
           <p className="text-lg font-bold text-trust-green">{scoreLabel}</p>
           <p className="text-sm text-slate max-w-lg mx-auto mt-2 leading-relaxed">
-            Based on your responses, your condition profile suggests potential
-            for improvement through non-surgical regenerative approaches.
-            Individual outcomes vary.
+            {scoreDescription} Individual outcomes vary.
           </p>
         </div>
 
@@ -103,28 +114,35 @@ export function QuizResults({ score }: QuizResultsProps) {
           </p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-          {treatments.map((treatment) => {
-            const matchType = matchLabels[treatment.slug] || "explore";
-            const style = matchLabelStyles[matchType];
-            const isBest = matchType === "best";
+          {adSafeTreatments.map((treatment) => {
+            const matchLevel =
+              matchLabels[
+                treatment.slug as keyof typeof matchLabels
+              ] as MatchLevel;
+            const style = getMatchLabelDisplay(matchLevel);
+            const isRecommended =
+              matchLevel === "best" || matchLevel === "recommended";
 
             return (
               <Card
                 key={treatment.slug}
-                variant={isBest ? "shimmer" : "default"}
-                className={`text-center relative overflow-hidden ${isBest ? "md:-mt-2 md:mb-2" : ""}`}
+                variant={isRecommended ? "shimmer" : "default"}
+                className={`text-center relative overflow-hidden ${
+                  isRecommended ? "md:-mt-2 md:mb-2" : ""
+                }`}
               >
-                {isBest && (
+                {isRecommended && (
                   <div
                     className="absolute top-0 left-1/2 -translate-x-1/2 translate-y-2 px-4 py-1 rounded-b-lg text-[10px] font-bold uppercase tracking-wider text-white"
                     style={{
-                      background: "linear-gradient(135deg, #C8A96E, #B8912E)",
+                      background:
+                        "linear-gradient(135deg, #C8A96E, #B8912E)",
                     }}
                   >
-                    Best Match
+                    {style.label}
                   </div>
                 )}
-                <div className={isBest ? "pt-5" : ""}>
+                <div className={isRecommended ? "pt-5" : ""}>
                   <p className="text-[11px] text-muted uppercase tracking-wider font-medium">
                     {treatment.name}
                   </p>
@@ -149,7 +167,7 @@ export function QuizResults({ score }: QuizResultsProps) {
         {/* CTA */}
         <div className="text-center mt-12">
           <Button size="lg">
-            Book Your Free Strategy Consultation
+            Book Your Free Consultation
             <svg
               width="16"
               height="16"
@@ -165,13 +183,16 @@ export function QuizResults({ score }: QuizResultsProps) {
             </svg>
           </Button>
           <p className="text-xs text-muted mt-3">
-            Discuss your score with a specialist -- no obligation
+            Discuss your score with a specialist — no obligation
           </p>
         </div>
 
         {/* Disclaimer */}
         <div className="mt-12 max-w-3xl mx-auto bg-white rounded-card p-6 border border-ivory flex gap-4 items-start">
-          <ShieldCheckIcon size={20} className="text-muted/40 shrink-0 mt-0.5" />
+          <ShieldCheckIcon
+            size={20}
+            className="text-muted/40 shrink-0 mt-0.5"
+          />
           <p className="text-[11px] text-muted leading-relaxed">
             This assessment is for educational purposes only and does not
             constitute medical advice. Your score is based on general research
