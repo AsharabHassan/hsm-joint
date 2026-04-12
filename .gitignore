@@ -1,0 +1,12 @@
+# Dev tooling
+.claude/
+.superpowers/
+hsw-joint-pain/.superpowers/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Misc
+*.pem
+logo (2).png
