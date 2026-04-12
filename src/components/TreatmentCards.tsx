@@ -1,13 +1,16 @@
-import { treatments } from "@/data/treatments";
+import { getAdSafeTreatments, getAllTreatments } from "@/data/treatments";
 import { Card } from "@/components/ui/Card";
 import { FadeIn } from "@/components/ui/FadeIn";
 import { CheckCircleIcon } from "@/components/ui/Icons";
 
 interface TreatmentCardsProps {
   bodyAreaName: string;
+  adSafe?: boolean; // default true — only show ad-safe treatments
 }
 
-export function TreatmentCards({ bodyAreaName }: TreatmentCardsProps) {
+export function TreatmentCards({ bodyAreaName, adSafe = true }: TreatmentCardsProps) {
+  const treatmentList = adSafe ? getAdSafeTreatments() : getAllTreatments();
+
   return (
     <section className="bg-cream py-20 md:py-28">
       <div className="max-w-page mx-auto px-4">
@@ -15,20 +18,20 @@ export function TreatmentCards({ bodyAreaName }: TreatmentCardsProps) {
           <div className="text-center mb-14">
             <div className="section-header-label">
               <div className="gold-line" />
-              <span>Regenerative Medicine</span>
+              <span>Treatment Options</span>
               <div className="gold-line" />
             </div>
             <h2 className="font-serif text-h2-mobile lg:text-h2-desktop font-bold mb-3">
               Non-Surgical Options for {bodyAreaName}
             </h2>
             <p className="text-sm text-slate max-w-lg mx-auto">
-              Explore evidence-based regenerative approaches available at our Harley Street clinic
+              Explore evidence-based injection approaches available at our Harley Street clinic
             </p>
           </div>
         </FadeIn>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {treatments.map((treatment, i) => (
+          {treatmentList.map((treatment, i) => (
             <FadeIn key={treatment.slug} delay={i * 100}>
               <Card variant="shimmer" className="h-full flex flex-col">
                 <div className="flex justify-between items-start mb-4">
