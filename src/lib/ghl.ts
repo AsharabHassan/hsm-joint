@@ -4,13 +4,20 @@ export interface QuizSubmission {
   phone: string;
   bodyArea: string;
   painLocation: string;
+  painIntensity: number;
+  stiffness: string;
+  functionalImpact: string[];
   duration: string;
-  dailyImpact: string;
   previousTreatments: string[];
+  ageRange: string;
   primaryGoal: string;
   score: number;
   scoreLabel: string;
-  matchedTreatment: string;
+  matchedTreatments: {
+    cortisone: string;
+    hyaluronicAcid: string;
+    advancedOptions: string;
+  };
   source: string;
   timestamp: string;
 }
@@ -39,19 +46,24 @@ export async function submitToGoHighLevel(
         customFields: {
           body_area: data.bodyArea,
           pain_location: data.painLocation,
+          pain_intensity: data.painIntensity.toString(),
+          stiffness: data.stiffness,
+          functional_impact: data.functionalImpact.join(", "),
           pain_duration: data.duration,
-          daily_impact: data.dailyImpact,
           previous_treatments: data.previousTreatments.join(", "),
+          age_range: data.ageRange,
           primary_goal: data.primaryGoal,
           improvement_score: data.score.toString(),
           score_label: data.scoreLabel,
-          matched_treatment: data.matchedTreatment,
+          matched_cortisone: data.matchedTreatments.cortisone,
+          matched_ha: data.matchedTreatments.hyaluronicAcid,
+          matched_advanced: data.matchedTreatments.advancedOptions,
           source: data.source,
         },
         tags: [
           `body-area:${data.bodyArea}`,
           `score:${data.scoreLabel.toLowerCase().replace(/\s+/g, "-")}`,
-          `treatment:${data.matchedTreatment}`,
+          `advanced:${data.matchedTreatments.advancedOptions}`,
           "source:landing-page",
         ],
       }),

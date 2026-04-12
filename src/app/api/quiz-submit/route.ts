@@ -5,7 +5,7 @@ export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
 
-    const { name, email, phone, bodyArea, answers, score, scoreLabel, matchedTreatment } = body;
+    const { name, email, phone, bodyArea, answers, score, scoreLabel, matchedTreatments } = body;
 
     if (!name || !email || !phone) {
       return NextResponse.json(
@@ -20,13 +20,16 @@ export async function POST(request: NextRequest) {
       phone,
       bodyArea,
       painLocation: answers.painLocation,
+      painIntensity: answers.painIntensity,
+      stiffness: answers.stiffness,
+      functionalImpact: answers.functionalImpact,
       duration: answers.duration,
-      dailyImpact: answers.dailyImpact,
       previousTreatments: answers.previousTreatments,
+      ageRange: answers.ageRange,
       primaryGoal: answers.primaryGoal,
       score,
       scoreLabel,
-      matchedTreatment,
+      matchedTreatments,
       source: "landing-page",
       timestamp: new Date().toISOString(),
     };
@@ -35,10 +38,9 @@ export async function POST(request: NextRequest) {
 
     if (!result.success) {
       console.error("GHL webhook error:", result.error);
-      // Still return success to user — we don't want CRM issues to block the UX
     }
 
-    return NextResponse.json({ success: true, score, scoreLabel, matchedTreatment });
+    return NextResponse.json({ success: true, score, scoreLabel, matchedTreatments });
   } catch (error) {
     console.error("Quiz submission error:", error);
     return NextResponse.json(
