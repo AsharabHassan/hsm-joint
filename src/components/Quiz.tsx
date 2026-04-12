@@ -18,6 +18,8 @@ import {
   UserIcon,
   MailIcon,
   PhoneIcon,
+  CheckCircleIcon,
+  StarIcon,
 } from "@/components/ui/Icons";
 
 interface QuizProps {
@@ -190,18 +192,103 @@ export function Quiz({ bodyAreaSlug }: QuizProps) {
     >
       <div className="relative z-10 max-w-page mx-auto px-4">
         {/* Section header */}
-        <div className="text-center mb-10">
+        <div className="text-center mb-8">
           <div className="section-header-label justify-center flex">
             <div className="gold-line" />
-            <span>Free Assessment</span>
+            <span>Free Clinical Assessment</span>
             <div className="gold-line" />
           </div>
-          <h2 className="font-serif text-h2-mobile lg:text-h2-desktop font-bold text-charcoal mb-2">
-            Discover Your Improvement Score
+          <h2 className="font-serif text-h2-mobile lg:text-h2-desktop font-bold text-charcoal mb-3">
+            Find Out If Non-Surgical Treatment Could Work For You
           </h2>
-          <p className="text-slate text-sm max-w-md mx-auto">
-            Answer 8 quick questions to explore which approaches may be relevant
+          <p className="text-slate text-sm max-w-xl mx-auto leading-relaxed">
+            Our assessment is built on the same validated clinical tools used by
+            orthopaedic specialists — adapted into a 3-minute questionnaire you can
+            complete from home.
           </p>
+        </div>
+
+        {/* What you'll get + Research trust block */}
+        <div className="max-w-3xl mx-auto mb-8">
+          {/* What you'll receive */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+            <div className="flex items-start gap-3 bg-cream rounded-[16px] p-4">
+              <div className="w-9 h-9 rounded-full bg-gold/10 flex items-center justify-center shrink-0 mt-0.5">
+                <CheckCircleIcon size={18} className="text-gold" />
+              </div>
+              <div>
+                <p className="text-[13px] font-bold text-charcoal mb-0.5">
+                  Personal Improvement Score
+                </p>
+                <p className="text-[11px] text-slate leading-relaxed">
+                  A 0-100 score based on your pain level, mobility, and treatment history
+                </p>
+              </div>
+            </div>
+            <div className="flex items-start gap-3 bg-cream rounded-[16px] p-4">
+              <div className="w-9 h-9 rounded-full bg-gold/10 flex items-center justify-center shrink-0 mt-0.5">
+                <StarIcon size={18} className="text-gold" />
+              </div>
+              <div>
+                <p className="text-[13px] font-bold text-charcoal mb-0.5">
+                  Matched Treatment Options
+                </p>
+                <p className="text-[11px] text-slate leading-relaxed">
+                  See which injection therapies are most suited to your specific profile
+                </p>
+              </div>
+            </div>
+            <div className="flex items-start gap-3 bg-cream rounded-[16px] p-4">
+              <div className="w-9 h-9 rounded-full bg-gold/10 flex items-center justify-center shrink-0 mt-0.5">
+                <ShieldCheckIcon size={18} className="text-gold" />
+              </div>
+              <div>
+                <p className="text-[13px] font-bold text-charcoal mb-0.5">
+                  Free Specialist Review
+                </p>
+                <p className="text-[11px] text-slate leading-relaxed">
+                  A GMC-registered specialist reviews your results within 24 hours
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Research citations */}
+          <div className="bg-[#FDFAF5] border border-gold/15 rounded-[16px] p-5 md:p-6">
+            <p className="text-[11px] font-bold uppercase tracking-[2px] text-gold mb-3">
+              Based on Published Clinical Research
+            </p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+              <div className="flex items-start gap-2.5">
+                <div className="w-1.5 h-1.5 rounded-full bg-trust-green mt-1.5 shrink-0" />
+                <p className="text-[12px] text-slate leading-relaxed">
+                  <span className="font-semibold text-charcoal">WOMAC Index</span> — the gold-standard
+                  assessment used in 10,000+ clinical trials for joint pain and osteoarthritis
+                </p>
+              </div>
+              <div className="flex items-start gap-2.5">
+                <div className="w-1.5 h-1.5 rounded-full bg-trust-green mt-1.5 shrink-0" />
+                <p className="text-[12px] text-slate leading-relaxed">
+                  <span className="font-semibold text-charcoal">NRS Pain Scale</span> — validated
+                  0-10 pain rating used by the NHS and WHO for treatment planning
+                </p>
+              </div>
+              <div className="flex items-start gap-2.5">
+                <div className="w-1.5 h-1.5 rounded-full bg-trust-green mt-1.5 shrink-0" />
+                <p className="text-[12px] text-slate leading-relaxed">
+                  <span className="font-semibold text-charcoal">Frontiers in Medicine (2024)</span> — compared
+                  injection therapies across 4-year follow-up for knee osteoarthritis
+                </p>
+              </div>
+              <div className="flex items-start gap-2.5">
+                <div className="w-1.5 h-1.5 rounded-full bg-trust-green mt-1.5 shrink-0" />
+                <p className="text-[12px] text-slate leading-relaxed">
+                  <span className="font-semibold text-charcoal">Cellular & Molecular Immunology (2023)</span> — 12 of 15
+                  RCTs showed positive pain and symptom outcomes
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
 
         <div className="max-w-quiz mx-auto">
