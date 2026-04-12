@@ -481,6 +481,39 @@ export function UserIcon(props: IconProps) {
   );
 }
 
+export function ClipboardIcon(props: IconProps) {
+  return (
+    <svg {...defaultProps(props)}>
+      <rect x="6" y="3" width="12" height="18" rx="2" stroke="currentColor" strokeWidth="1.5" />
+      <path d="M9 3V2C9 1.45 9.45 1 10 1H14C14.55 1 15 1.45 15 2V3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+      <path d="M10 9H14" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+      <path d="M10 13H14" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+      <path d="M10 17H12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+export function StethoscopeIcon(props: IconProps) {
+  return (
+    <svg {...defaultProps(props)}>
+      <path
+        d="M6 12V8C6 5.79 7.79 4 10 4H14C16.21 4 18 5.79 18 8V12"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+      />
+      <circle cx="6" cy="15" r="3" stroke="currentColor" strokeWidth="1.5" />
+      <path
+        d="M18 12V16C18 18.21 16.21 20 14 20H12"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+      />
+      <circle cx="18" cy="12" r="1.5" fill="currentColor" />
+    </svg>
+  );
+}
+
 // ─── Icon map for dynamic lookup ───────────────────────────────
 
 export const bodyAreaIconMap: Record<string, React.FC<IconProps>> = {
