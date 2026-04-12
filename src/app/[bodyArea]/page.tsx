@@ -20,6 +20,8 @@ import { Testimonials } from "@/components/Testimonials";
 import { LocationTrust } from "@/components/LocationTrust";
 import { FAQ } from "@/components/FAQ";
 import { BottomCTA } from "@/components/BottomCTA";
+import { PatientJourney } from "@/components/PatientJourney";
+import { DoctorProfiles } from "@/components/DoctorProfiles";
 
 export function generateStaticParams() {
   return getAllBodyAreaSlugs().map((slug) => ({ bodyArea: slug }));
@@ -77,6 +79,7 @@ export default async function BodyAreaPage({
       <Hero bodyArea={bodyArea} />
       <Quiz bodyAreaSlug={slug} />
       <SocialProof />
+      <PatientJourney />
       <StatsSection bodyAreaSlug={slug} />
       <ConditionCards
         conditions={bodyArea.conditions}
@@ -85,6 +88,7 @@ export default async function BodyAreaPage({
       <TraditionalRisks bodyArea={bodyArea} />
       <ComparisonTable />
       <TreatmentCards bodyAreaName={bodyArea.name} />
+      <DoctorProfiles />
       <Testimonials />
       <LocationTrust />
       <FAQ bodyAreaSlug={slug} bodyAreaName={bodyArea.name} />
