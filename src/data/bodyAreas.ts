@@ -27,7 +27,7 @@ export const bodyAreas: BodyArea[] = [
     name: "Knee Pain",
     shortName: "Knee",
     icon: "knee",
-    headline: "Understanding Your Knee Pain Options",
+    headline: "Tired of Knee Pain Holding You Back?",
     subheadline:
       "Take our 2-minute joint health assessment to explore which non-surgical approaches may be suitable for your condition.",
     heroDescription:
@@ -95,7 +95,7 @@ export const bodyAreas: BodyArea[] = [
     name: "Hip Pain",
     shortName: "Hip",
     icon: "hip",
-    headline: "Understanding Your Hip Pain Options",
+    headline: "Tired of Hip Pain Holding You Back?",
     subheadline:
       "Take our 2-minute joint health assessment to explore which non-surgical approaches may be suitable for your hip condition.",
     heroDescription:
@@ -163,7 +163,7 @@ export const bodyAreas: BodyArea[] = [
     name: "Shoulder Pain",
     shortName: "Shoulder",
     icon: "shoulder",
-    headline: "Understanding Your Shoulder Pain Options",
+    headline: "Tired of Shoulder Pain Holding You Back?",
     subheadline:
       "Take our 2-minute joint health assessment to explore which non-surgical approaches may be suitable for your shoulder condition.",
     heroDescription:
@@ -231,7 +231,7 @@ export const bodyAreas: BodyArea[] = [
     name: "Back Pain",
     shortName: "Back",
     icon: "back",
-    headline: "Understanding Your Back Pain Options",
+    headline: "Tired of Back Pain Holding You Back?",
     subheadline:
       "Take our 2-minute assessment to explore which non-surgical approaches may be suitable for your back condition.",
     heroDescription:
@@ -298,7 +298,7 @@ export const bodyAreas: BodyArea[] = [
     name: "Elbow Pain",
     shortName: "Elbow",
     icon: "elbow",
-    headline: "Understanding Your Elbow Pain Options",
+    headline: "Tired of Elbow Pain Holding You Back?",
     subheadline:
       "Take our 2-minute assessment to explore which non-surgical approaches may be suitable for your elbow condition.",
     heroDescription:
@@ -349,7 +349,7 @@ export const bodyAreas: BodyArea[] = [
     name: "Hand, Wrist, Foot & Ankle Pain",
     shortName: "Extremities",
     icon: "extremities",
-    headline: "Understanding Your Hand, Wrist, Foot & Ankle Pain Options",
+    headline: "Tired of Hand, Wrist, Foot & Ankle Pain?",
     subheadline:
       "Take our 2-minute assessment to explore which non-surgical approaches may be suitable for your condition.",
     heroDescription:

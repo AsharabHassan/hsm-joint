@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/Button";
 import { CountUp } from "@/components/ui/CountUp";
-import { MedicalCrossIcon, StarIcon } from "@/components/ui/Icons";
+import { MedicalCrossIcon, StarIcon, ClockIcon } from "@/components/ui/Icons";
 import type { BodyArea } from "@/data/bodyAreas";
 
 interface HeroProps {
@@ -82,7 +82,7 @@ export function Hero({ bodyArea }: HeroProps) {
                     WebkitTextFillColor: "transparent",
                   }}
                 >
-                  Understanding
+                  Tired of
                 </span>
                 <span
                   className="absolute bottom-0 left-0 right-0 h-3 bg-gold/10 rounded-sm"
@@ -92,7 +92,7 @@ export function Hero({ bodyArea }: HeroProps) {
                   }}
                 />
               </span>{" "}
-              {bodyArea.headline.replace("Understanding ", "")}
+              {bodyArea.headline.replace("Tired of ", "")}
             </h1>
 
             {/* Subheadline */}
@@ -126,6 +126,14 @@ export function Hero({ bodyArea }: HeroProps) {
                 </svg>
               </Button>
               <span className="text-[13px] text-muted">No obligation</span>
+            </div>
+
+            {/* NHS wait-time callout */}
+            <div className="inline-flex items-center gap-2 bg-trust-green-light border border-trust-green/20 rounded-full px-4 py-2 mt-6">
+              <ClockIcon size={14} className="text-trust-green" />
+              <span className="text-[12px] font-semibold text-trust-green">
+                Skip the 28-week NHS wait
+              </span>
             </div>
 
             {/* Stats row */}
