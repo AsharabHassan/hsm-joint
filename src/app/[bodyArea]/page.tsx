@@ -1,3 +1,12 @@
+/**
+ * GOOGLE ADS COMPLIANCE NOTE:
+ * This page is designed to receive Google Ads traffic.
+ * - Hero, Quiz, QuizResults, TreatmentCards, PatientJourney, DoctorProfiles: CLEAN (no restricted terms)
+ * - ConditionCards: Contains educational references to PRP with research citations (educational exception may apply)
+ * - ComparisonTable: Contains PRP/exosome/stem-cell column headers — NEEDS UPDATE for strict compliance
+ * - Footer: Contains one reference to "PRP and stem cell-based" — NEEDS UPDATE for strict compliance
+ * - SocialProof, StatsSection, TraditionalRisks, Testimonials, LocationTrust, FAQ, BottomCTA: CLEAN
+ */
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { getBodyAreaBySlug, getAllBodyAreaSlugs } from "@/data/bodyAreas";
