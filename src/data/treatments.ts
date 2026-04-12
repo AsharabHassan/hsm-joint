@@ -14,9 +14,70 @@ export interface Treatment {
     best: string;
     explore: string;
   };
+  adSafe?: boolean; // true = can be shown on Google Ads landing pages
 }
 
 export const treatments: Treatment[] = [
+  {
+    slug: "cortisone",
+    name: "Cortisone Injection",
+    price: "From £250",
+    priceNote: "Final fees confirmed following assessment, based on individual treatment plan",
+    duration: "15-30 minutes",
+    setting: "Outpatient",
+    downtime: "Minimal — resume normal activities same day",
+    description:
+      "Cortisone (corticosteroid) injections are one of the most established treatments for joint inflammation and pain. The injection delivers a powerful anti-inflammatory medication directly into the affected joint, providing targeted relief. Cortisone works by suppressing the immune response that causes inflammation, which in turn reduces swelling, pain, and stiffness. Relief typically begins within 48-72 hours and can last from several weeks to several months depending on the individual and severity of the condition. Cortisone injections are widely used across the NHS and private practice for osteoarthritis, bursitis, tendinitis, and other inflammatory joint conditions. While effective for short-to-medium-term pain relief, repeated cortisone injections are generally limited to 3-4 per year for a single joint, as research suggests that frequent use may contribute to cartilage thinning over time.",
+    mechanism:
+      "Anti-inflammatory corticosteroid delivered directly into the joint to suppress inflammation and reduce pain.",
+    tags: ["15-30 min", "Outpatient", "Same-day recovery"],
+    matchLabel: {
+      good: "Good Match",
+      best: "Best Match",
+      explore: "Worth Exploring",
+    },
+    adSafe: true,
+  },
+  {
+    slug: "hyaluronic-acid",
+    name: "Hyaluronic Acid Injection",
+    price: "From £350",
+    priceNote: "Final fees confirmed following assessment, based on individual treatment plan",
+    duration: "15-30 minutes",
+    setting: "Outpatient",
+    downtime: "Minimal — resume normal activities within 24 hours",
+    description:
+      "Hyaluronic acid (HA) injection therapy, also known as viscosupplementation, involves injecting a gel-like substance directly into the affected joint. Hyaluronic acid is a naturally occurring component of synovial fluid — the lubricant that helps joints move smoothly. In joints affected by osteoarthritis, the concentration and quality of natural hyaluronic acid decreases, contributing to friction, pain, and stiffness. HA injections aim to restore this lubrication, cushioning the joint and potentially reducing pain during movement. A course typically involves 1-3 injections spaced one week apart, with effects that may last 6-12 months. NICE guidelines recognise viscosupplementation as a treatment option for knee osteoarthritis. HA injections are considered safe with a low side-effect profile, making them suitable for patients who cannot tolerate anti-inflammatory medications or who wish to reduce their reliance on pain medication.",
+    mechanism:
+      "Gel-like hyaluronic acid injected into the joint to restore natural lubrication and cushioning, reducing friction and pain.",
+    tags: ["15-30 min", "Outpatient", "NICE recognised"],
+    matchLabel: {
+      good: "Good Match",
+      best: "Best Match",
+      explore: "Worth Exploring",
+    },
+    adSafe: true,
+  },
+  {
+    slug: "advanced-options",
+    name: "Advanced Injection Options",
+    price: "Discussed at Consultation",
+    priceNote: "Your specialist will recommend the most suitable approach for your condition",
+    duration: "30-90 minutes",
+    setting: "Outpatient",
+    downtime: "Varies by treatment — your specialist will advise",
+    description:
+      "Several advanced injection therapies may be suitable depending on your individual assessment results, the severity of your condition, and your treatment history. These evidence-based approaches use the body's own biological mechanisms to support joint health and tissue repair. Your GMC-registered specialist will review your assessment and medical history to determine which advanced options, if any, may be appropriate for your situation. A thorough consultation ensures you receive personalised guidance based on the latest published research and clinical evidence.",
+    mechanism:
+      "Several advanced injection therapies may be suitable depending on your assessment results. Discuss with your specialist.",
+    tags: ["Personalised", "Specialist-guided", "Evidence-based"],
+    matchLabel: {
+      good: "Worth Exploring",
+      best: "Recommended",
+      explore: "Ask Your Specialist",
+    },
+    adSafe: true,
+  },
   {
     slug: "prp",
     name: "PRP Therapy",
@@ -36,6 +97,7 @@ export const treatments: Treatment[] = [
       best: "Best Match",
       explore: "Worth Exploring",
     },
+    adSafe: false,
   },
   {
     slug: "exosomes",
@@ -56,6 +118,7 @@ export const treatments: Treatment[] = [
       best: "Best Match",
       explore: "Worth Exploring",
     },
+    adSafe: false,
   },
   {
     slug: "stem-cells",
@@ -76,5 +139,14 @@ export const treatments: Treatment[] = [
       best: "Best Match",
       explore: "Worth Exploring",
     },
+    adSafe: false,
   },
 ];
+
+export function getAdSafeTreatments(): Treatment[] {
+  return treatments.filter((t) => t.adSafe === true);
+}
+
+export function getAllTreatments(): Treatment[] {
+  return treatments;
+}
