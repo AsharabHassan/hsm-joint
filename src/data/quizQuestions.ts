@@ -1,14 +1,21 @@
 export interface QuizOption {
   label: string;
   value: string;
-  weight: number; // 1-5 scale contributing to score
+  weight: number;
+}
+
+export interface NrsConfig {
+  min: number;
+  max: number;
+  labels: Record<number, string>;
 }
 
 export interface QuizQuestion {
   id: string;
   question: string;
-  multiSelect?: boolean;
-  options: QuizOption[];
+  type: "single" | "multi" | "nrs";
+  options?: QuizOption[];
+  nrsConfig?: NrsConfig;
 }
 
 export interface BodyAreaQuizConfig {
@@ -20,11 +27,54 @@ function buildQuestions(painLocationOptions: QuizOption[]): QuizQuestion[] {
   return [
     {
       id: "pain-location",
+      type: "single",
       question: "Where is your primary area of discomfort?",
       options: painLocationOptions,
     },
     {
+      id: "pain-intensity",
+      type: "nrs",
+      question: "On a scale of 0-10, how would you rate your pain on a typical day?",
+      nrsConfig: {
+        min: 0,
+        max: 10,
+        labels: {
+          0: "No pain",
+          3: "Mild",
+          5: "Moderate",
+          7: "Severe",
+          10: "Worst imaginable",
+        },
+      },
+    },
+    {
+      id: "stiffness",
+      type: "single",
+      question: "How severe is your joint stiffness first thing in the morning?",
+      options: [
+        { label: "None — I move freely", value: "none", weight: 1 },
+        { label: "Mild — loosens within 10 minutes", value: "mild", weight: 2 },
+        { label: "Moderate — takes 10-30 minutes to ease", value: "moderate", weight: 3 },
+        { label: "Severe — lasts over 30 minutes", value: "severe", weight: 4 },
+        { label: "Extreme — stiffness barely improves", value: "extreme", weight: 5 },
+      ],
+    },
+    {
+      id: "functional-impact",
+      type: "multi",
+      question: "Which daily activities are affected by your joint pain?",
+      options: [
+        { label: "Walking on flat surfaces", value: "walking-flat", weight: 2 },
+        { label: "Going up or down stairs", value: "stairs", weight: 3 },
+        { label: "Getting in/out of a car or chair", value: "sitting-standing", weight: 3 },
+        { label: "Standing for 15+ minutes", value: "standing", weight: 3 },
+        { label: "Exercise or sports", value: "exercise", weight: 2 },
+        { label: "Sleeping through the night", value: "sleeping", weight: 4 },
+      ],
+    },
+    {
       id: "duration",
+      type: "single",
       question: "How long have you been experiencing this pain?",
       options: [
         { label: "Less than 1 month", value: "lt-1m", weight: 1 },
@@ -35,60 +85,41 @@ function buildQuestions(painLocationOptions: QuizOption[]): QuizQuestion[] {
       ],
     },
     {
-      id: "daily-impact",
-      question: "How does this affect your daily activities?",
+      id: "previous-treatments",
+      type: "multi",
+      question: "Which treatments have you already tried?",
       options: [
-        { label: "Mild — occasional discomfort", value: "mild", weight: 1 },
-        {
-          label: "Moderate — limits some activities",
-          value: "moderate",
-          weight: 2,
-        },
-        {
-          label: "Significant — walking is difficult",
-          value: "significant",
-          weight: 4,
-        },
-        {
-          label: "Severe — constant pain, very limited",
-          value: "severe",
-          weight: 5,
-        },
+        { label: "No treatment yet", value: "none", weight: 1 },
+        { label: "Over-the-counter painkillers", value: "otc", weight: 1 },
+        { label: "Physiotherapy", value: "physio", weight: 2 },
+        { label: "Cortisone / steroid injections", value: "cortisone", weight: 3 },
+        { label: "Hyaluronic acid injections", value: "ha", weight: 3 },
+        { label: "Prescription pain medication", value: "prescription", weight: 2 },
+        { label: "Surgery has been recommended", value: "surgery-rec", weight: 5 },
       ],
     },
     {
-      id: "previous-treatments",
-      question: "Have you tried any previous treatments?",
-      multiSelect: true,
+      id: "age-range",
+      type: "single",
+      question: "What is your age range?",
       options: [
-        { label: "No treatment yet", value: "none", weight: 1 },
-        { label: "Physiotherapy", value: "physio", weight: 2 },
-        { label: "Steroid injections", value: "steroids", weight: 3 },
-        { label: "Pain medication", value: "medication", weight: 2 },
-        { label: "Surgery recommended", value: "surgery-rec", weight: 5 },
+        { label: "Under 30", value: "under-30", weight: 2 },
+        { label: "30–44", value: "30-44", weight: 3 },
+        { label: "45–59", value: "45-59", weight: 4 },
+        { label: "60–74", value: "60-74", weight: 5 },
+        { label: "75+", value: "75-plus", weight: 4 },
       ],
     },
     {
       id: "primary-goal",
-      question: "What is your primary goal?",
+      type: "single",
+      question: "What matters most to you right now?",
       options: [
-        {
-          label: "Return to sports / exercise",
-          value: "sports",
-          weight: 3,
-        },
-        { label: "Walk pain-free again", value: "walk", weight: 3 },
-        { label: "Avoid surgery", value: "avoid-surgery", weight: 4 },
-        {
-          label: "Reduce daily pain / medication",
-          value: "reduce-pain",
-          weight: 3,
-        },
-        {
-          label: "Improve long-term joint health",
-          value: "long-term",
-          weight: 2,
-        },
+        { label: "Return to sports or exercise", value: "sports", weight: 3 },
+        { label: "Walk without pain", value: "walk", weight: 4 },
+        { label: "Avoid or delay surgery", value: "avoid-surgery", weight: 5 },
+        { label: "Reduce daily pain and medication", value: "reduce-pain", weight: 3 },
+        { label: "Understand my options before deciding", value: "understand", weight: 2 },
       ],
     },
   ];
