@@ -3,17 +3,17 @@ export interface QuizSubmission {
   email: string;
   phone: string;
   bodyArea: string;
-  painLocation: string;
-  painIntensity: number;
-  stiffness: string;
-  functionalImpact: string[];
-  duration: string;
-  previousTreatments: string[];
-  ageRange: string;
-  primaryGoal: string;
-  score: number;
-  scoreLabel: string;
-  matchedTreatments: {
+  painLocation?: string;
+  painIntensity?: number;
+  stiffness?: string;
+  functionalImpact?: string[];
+  duration?: string;
+  previousTreatments?: string[];
+  ageRange?: string;
+  primaryGoal?: string;
+  score?: number;
+  scoreLabel?: string;
+  matchedTreatments?: {
     cortisone: string;
     hyaluronicAcid: string;
     advancedOptions: string;
@@ -44,25 +44,27 @@ export async function submitToGoHighLevel(
         },
         customFields: {
           body_area: data.bodyArea,
-          pain_location: data.painLocation,
-          pain_intensity: data.painIntensity.toString(),
-          stiffness: data.stiffness,
-          functional_impact: data.functionalImpact.join(", "),
-          pain_duration: data.duration,
-          previous_treatments: data.previousTreatments.join(", "),
-          age_range: data.ageRange,
-          primary_goal: data.primaryGoal,
-          improvement_score: data.score.toString(),
-          score_label: data.scoreLabel,
-          matched_cortisone: data.matchedTreatments.cortisone,
-          matched_ha: data.matchedTreatments.hyaluronicAcid,
-          matched_advanced: data.matchedTreatments.advancedOptions,
+          ...(data.painLocation && { pain_location: data.painLocation }),
+          ...(data.painIntensity != null && { pain_intensity: data.painIntensity.toString() }),
+          ...(data.stiffness && { stiffness: data.stiffness }),
+          ...(data.functionalImpact && { functional_impact: data.functionalImpact.join(", ") }),
+          ...(data.duration && { pain_duration: data.duration }),
+          ...(data.previousTreatments && { previous_treatments: data.previousTreatments.join(", ") }),
+          ...(data.ageRange && { age_range: data.ageRange }),
+          ...(data.primaryGoal && { primary_goal: data.primaryGoal }),
+          ...(data.score != null && { improvement_score: data.score.toString() }),
+          ...(data.scoreLabel && { score_label: data.scoreLabel }),
+          ...(data.matchedTreatments && {
+            matched_cortisone: data.matchedTreatments.cortisone,
+            matched_ha: data.matchedTreatments.hyaluronicAcid,
+            matched_advanced: data.matchedTreatments.advancedOptions,
+          }),
           source: data.source,
         },
         tags: [
           `body-area:${data.bodyArea}`,
-          `score:${data.scoreLabel.toLowerCase().replace(/\s+/g, "-")}`,
-          `advanced:${data.matchedTreatments.advancedOptions}`,
+          ...(data.scoreLabel ? [`score:${data.scoreLabel.toLowerCase().replace(/\s+/g, "-")}`] : []),
+          ...(data.matchedTreatments ? [`advanced:${data.matchedTreatments.advancedOptions}`] : []),
           `source:${data.source}`,
         ],
       }),

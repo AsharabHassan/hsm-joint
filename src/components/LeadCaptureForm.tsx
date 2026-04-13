@@ -24,7 +24,7 @@ export function LeadCaptureForm() {
         body: JSON.stringify({
           ...contact,
           bodyArea: "homepage",
-          source: "homepage-lead-form",
+          pageSource: "homepage",
         }),
       });
     } catch {

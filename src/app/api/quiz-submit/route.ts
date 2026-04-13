@@ -45,39 +45,29 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    if (
-      !answers ||
-      typeof answers !== "object" ||
-      !Array.isArray(answers.functionalImpact) ||
-      !Array.isArray(answers.previousTreatments)
-    ) {
-      return NextResponse.json(
-        { error: "Invalid answers payload" },
-        { status: 400 }
-      );
-    }
+    const isSimpleLead = !answers;
 
     const submission: QuizSubmission = {
       name,
       email,
       phone,
       bodyArea,
-      painLocation: answers.painLocation,
-      painIntensity: answers.painIntensity,
-      stiffness: answers.stiffness,
-      functionalImpact: answers.functionalImpact,
-      duration: answers.duration,
-      previousTreatments: answers.previousTreatments,
-      ageRange: answers.ageRange,
-      primaryGoal: answers.primaryGoal,
-      score,
-      scoreLabel,
-      matchedTreatments,
-      source: pageSource || "landing-page",
+      painLocation: isSimpleLead ? undefined : answers.painLocation,
+      painIntensity: isSimpleLead ? undefined : answers.painIntensity,
+      stiffness: isSimpleLead ? undefined : answers.stiffness,
+      functionalImpact: isSimpleLead ? [] : answers.functionalImpact,
+      duration: isSimpleLead ? undefined : answers.duration,
+      previousTreatments: isSimpleLead ? [] : answers.previousTreatments,
+      ageRange: isSimpleLead ? undefined : answers.ageRange,
+      primaryGoal: isSimpleLead ? undefined : answers.primaryGoal,
+      score: isSimpleLead ? undefined : score,
+      scoreLabel: isSimpleLead ? undefined : scoreLabel,
+      matchedTreatments: isSimpleLead ? undefined : matchedTreatments,
+      source: pageSource || bodyArea || "landing-page",
       timestamp: new Date().toISOString(),
     };
 
-    const webhookUrl = resolveWebhookUrl(pageSource || "");
+    const webhookUrl = resolveWebhookUrl(pageSource || bodyArea || "");
     const result = await submitToGoHighLevel(submission, webhookUrl);
 
     if (!result.success) {

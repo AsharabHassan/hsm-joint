@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/Button";
 import { NrsSlider } from "@/components/NrsSlider";
 import { QuizResults } from "@/components/QuizResults";
@@ -41,6 +41,15 @@ export function Quiz({ bodyAreaSlug, pageSource }: QuizProps) {
   const [contact, setContact] = useState({ name: "", email: "", phone: "" });
   const [score, setScore] = useState(0);
   const [submitting, setSubmitting] = useState(false);
+  const cardRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (state === "results") return;
+    const timer = setTimeout(() => {
+      cardRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 100);
+    return () => clearTimeout(timer);
+  }, [currentStep, state]);
 
   if (questions.length === 0) return null;
 
@@ -340,6 +349,7 @@ export function Quiz({ bodyAreaSlug, pageSource }: QuizProps) {
         <div className="max-w-quiz mx-auto">
           {/* Quiz card */}
           <div
+            ref={cardRef}
             className="bg-white rounded-[22px] p-7 md:p-10 relative overflow-hidden"
             style={{
               boxShadow: "0 25px 80px rgba(0,0,0,0.3), 0 0 0 1px rgba(200,169,110,0.1)",

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { getAdSafeTreatments } from "@/data/treatments";
@@ -19,10 +19,18 @@ interface QuizResultsProps {
 
 export function QuizResults({ score }: QuizResultsProps) {
   const [displayScore, setDisplayScore] = useState(0);
+  const sectionRef = useRef<HTMLElement>(null);
   const scoreLabel = getScoreLabel(score);
   const scoreDescription = getScoreDescription(score);
   const matchLabels = getTreatmentMatchLabels(score);
   const adSafeTreatments = getAdSafeTreatments();
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      sectionRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 100);
+    return () => clearTimeout(timer);
+  }, []);
 
   useEffect(() => {
     const duration = 2000;
@@ -40,7 +48,7 @@ export function QuizResults({ score }: QuizResultsProps) {
   }, [score]);
 
   return (
-    <section className="bg-cream py-20 md:py-28">
+    <section ref={sectionRef} className="bg-cream py-20 md:py-28">
       <div className="max-w-page mx-auto px-4">
         {/* Section header */}
         <div className="text-center mb-12">
@@ -166,22 +174,28 @@ export function QuizResults({ score }: QuizResultsProps) {
 
         {/* CTA */}
         <div className="text-center mt-12">
-          <Button size="lg">
-            Book Your Free Consultation
-            <svg
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="M5 12H19" />
-              <path d="M14 7L19 12L14 17" />
-            </svg>
-          </Button>
+          <a
+            href="https://link.harleystreetmedicalwellness.co.uk/widget/bookings/wellness-consultant-1"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Button size="lg">
+              Book Your Free Consultation
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M5 12H19" />
+                <path d="M14 7L19 12L14 17" />
+              </svg>
+            </Button>
+          </a>
           <p className="text-xs text-muted mt-3">
             Discuss your score with a specialist — no obligation
           </p>
