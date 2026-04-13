@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Font &amp; Luxury Direction</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700&family=Sora:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'DM Sans',sans-serif;background:#080808;color:#fff;-webkit-font-smoothing:antialiased}
+
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;max-width:1300px;margin:0 auto;padding:0 24px}
+  @media(max-width:900px){.grid{grid-template-columns:1fr}}
+
+  .card{border-radius:16px;overflow:hidden;cursor:pointer;transition:all 0.35s cubic-bezier(0.16,1,0.3,1);border:2px solid transparent;position:relative}
+  .card:hover{transform:translateY(-4px);box-shadow:0 20px 60px rgba(200,169,110,0.15)}
+  .card.picked{border-color:#C8A96E;box-shadow:0 0 0 1px #C8A96E,0 20px 60px rgba(200,169,110,0.2)}
+  .card.picked::after{content:'SELECTED';position:absolute;top:16px;right:16px;font-size:9px;letter-spacing:2px;background:#C8A96E;color:#0a0a0a;padding:4px 12px;border-radius:20px;font-weight:700;font-family:'DM Sans',sans-serif;z-index:10}
+
+  .hero-mock{padding:48px 40px 44px;min-height:380px;position:relative;overflow:hidden}
+  .tag{display:inline-flex;align-items:center;gap:7px;border-radius:30px;padding:7px 16px 7px 10px;margin-bottom:22px;font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase}
+  .tag .dot{width:6px;height:6px;border-radius:50%}
+  .body-text{font-size:14px;line-height:1.75;margin-bottom:28px;max-width:420px}
+  .cta-btn{display:inline-flex;align-items:center;gap:10px;padding:15px 30px;border:none;border-radius:12px;font-size:14px;font-weight:700;cursor:pointer;letter-spacing:0.3px}
+  .stats-row{display:flex;gap:28px;margin-top:36px;padding-top:28px}
+  .stat-num{font-size:28px;font-weight:700;line-height:1}
+  .stat-label{font-size:9px;text-transform:uppercase;letter-spacing:1.5px;margin-top:4px}
+
+  .label{text-align:center;padding:20px;font-size:13px;font-weight:600;letter-spacing:0.5px}
+  .sublabel{text-align:center;padding:0 20px 20px;font-size:11px;color:#888;line-height:1.6}
+
+  .section-title{text-align:center;padding:40px 24px 20px;max-width:1300px;margin:0 auto}
+  .section-title h2{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:400;color:#999;letter-spacing:1px}
+  .section-title p{font-size:12px;color:#555;margin-top:8px}
+</style>
+</head>
+<body>
+
+<div style="text-align:center;padding:40px 24px 12px">
+  <h1 style="font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:400;color:#fff;letter-spacing:1px">Font &amp; Luxury Direction</h1>
+  <p style="font-size:13px;color:#777;margin-top:10px;max-width:600px;margin-left:auto;margin-right:auto">Each option shows a different serif + sans pairing with a distinct luxury personality. Click to select your favourite.</p>
+</div>
+
+<!-- PAIR 1 & 2 -->
+<div class="section-title"><h2>Serif Heading Options</h2><p>The display font sets the entire luxury tone</p></div>
+
+<div class="grid" style="margin-bottom:32px">
+
+  <!-- A: Cormorant Garamond + Outfit -->
+  <div class="card" onclick="pick(this,'a')">
+    <div class="hero-mock" style="background:linear-gradient(160deg,#FAF5EC,#EDE5D5)">
+      <div class="tag" style="background:white;border:1px solid rgba(0,0,0,0.05);color:#1A6B4A">
+        <div class="dot" style="background:#1A6B4A"></div>
+        <span style="font-family:Outfit">GMC Registered</span>
+      </div>
+      <h1 style="font-family:'Cormorant Garamond',serif;font-size:44px;line-height:1.05;font-weight:600;color:#1A1A1A;letter-spacing:-0.5px;margin-bottom:16px">
+        Your Knee Pain<br>
+        <span style="color:#B8912E;font-style:italic;font-weight:400">Has Better Options</span><br>
+        Than Surgery
+      </h1>
+      <p class="body-text" style="font-family:Outfit;color:#6B6B6B;font-weight:300">
+        Explore non-surgical regenerative approaches backed by published research. Get your personalised score in 2 minutes.
+      </p>
+      <button class="cta-btn" style="background:#1A1A1A;color:white;font-family:Outfit">
+        Start Free Assessment
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12H19"/><path d="M14 7L19 12L14 17"/></svg>
+      </button>
+      <div class="stats-row" style="border-top:1px solid rgba(0,0,0,0.06)">
+        <div><div class="stat-num" style="font-family:'Cormorant Garamond',serif;color:#1A1A1A">6,000<span style="color:#C8A96E">+</span></div><div class="stat-label" style="font-family:Outfit;color:#AAA">Assessed</div></div>
+        <div style="width:1px;background:rgba(0,0,0,0.06)"></div>
+        <div><div class="stat-num" style="font-family:'Cormorant Garamond',serif;color:#1A1A1A">4.9</div><div class="stat-label" style="font-family:Outfit;color:#AAA">Rating</div></div>
+      </div>
+    </div>
+    <div class="label" style="background:#111;color:#eee">A. Cormorant Garamond + Outfit</div>
+    <div class="sublabel" style="background:#111">High fashion editorial. The italic gold accent is pure luxury. Cormorant is thinner and more elegant than Playfair. Outfit is geometric and ultra-clean.</div>
+  </div>
+
+  <!-- B: Libre Baskerville + Sora -->
+  <div class="card" onclick="pick(this,'b')">
+    <div class="hero-mock" style="background:linear-gradient(160deg,#F8F3EB,#EBE3D5)">
+      <div class="tag" style="background:white;border:1px solid rgba(0,0,0,0.05);color:#1A6B4A">
+        <div class="dot" style="background:#1A6B4A"></div>
+        <span style="font-family:Sora;font-weight:500">GMC Registered</span>
+      </div>
+      <h1 style="font-family:'Libre Baskerville',serif;font-size:38px;line-height:1.12;font-weight:700;color:#1A1A1A;letter-spacing:-0.3px;margin-bottom:16px">
+        Your Knee Pain<br>
+        <span style="color:#B8912E">Has Better Options</span><br>
+        Than Surgery
+      </h1>
+      <p class="body-text" style="font-family:Sora;color:#6B6B6B;font-weight:300;font-size:13.5px">
+        Explore non-surgical regenerative approaches backed by published research. Get your personalised score in 2 minutes.
+      </p>
+      <button class="cta-btn" style="background:#1A1A1A;color:white;font-family:Sora;font-weight:600">
+        Start Free Assessment
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12H19"/><path d="M14 7L19 12L14 17"/></svg>
+      </button>
+      <div class="stats-row" style="border-top:1px solid rgba(0,0,0,0.06)">
+        <div><div class="stat-num" style="font-family:'Libre Baskerville',serif;color:#1A1A1A">6,000<span style="color:#C8A96E">+</span></div><div class="stat-label" style="font-family:Sora;color:#AAA">Assessed</div></div>
+        <div style="width:1px;background:rgba(0,0,0,0.06)"></div>
+        <div><div class="stat-num" style="font-family:'Libre Baskerville',serif;color:#1A1A1A">4.9</div><div class="stat-label" style="font-family:Sora;color:#AAA">Rating</div></div>
+      </div>
+    </div>
+    <div class="label" style="background:#111;color:#eee">B. Libre Baskerville + Sora</div>
+    <div class="sublabel" style="background:#111">Classic British authority. Baskerville is the typeface of prestige (literally used by governments). Sora is modern and geometric. Feels established and trustworthy.</div>
+  </div>
+
+</div>
+
+<!-- PAIR 3 & 4 -->
+<div class="grid" style="margin-bottom:32px">
+
+  <!-- C: Cormorant Garamond + Sora (ultra-lux) -->
+  <div class="card" onclick="pick(this,'c')">
+    <div class="hero-mock" style="background:linear-gradient(160deg,#0F0F0F,#1A1612);position:relative">
+      <!-- Gold grain overlay -->
+      <div style="position:absolute;inset:0;opacity:0.03;background-image:radial-gradient(circle at 1px 1px,#C8A96E 0.5px,transparent 0);background-size:16px 16px"></div>
+      <div class="tag" style="background:rgba(200,169,110,0.1);border:1px solid rgba(200,169,110,0.2);color:#C8A96E;position:relative;z-index:1">
+        <div class="dot" style="background:#C8A96E"></div>
+        <span style="font-family:Sora;font-weight:500">GMC Registered</span>
+      </div>
+      <h1 style="font-family:'Cormorant Garamond',serif;font-size:46px;line-height:1.05;font-weight:600;color:#FDFAF5;letter-spacing:-0.5px;margin-bottom:16px;position:relative;z-index:1">
+        Your Knee Pain<br>
+        <span style="background:linear-gradient(135deg,#C8A96E,#E8D5A0);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-style:italic;font-weight:400">Has Better Options</span><br>
+        Than Surgery
+      </h1>
+      <p class="body-text" style="font-family:Sora;color:rgba(255,255,255,0.45);font-weight:300;position:relative;z-index:1">
+        Explore non-surgical regenerative approaches backed by published research.
+      </p>
+      <button class="cta-btn" style="background:linear-gradient(135deg,#C8A96E,#B8912E);color:#0F0F0F;font-family:Sora;font-weight:700;position:relative;z-index:1;box-shadow:0 4px 20px rgba(200,169,110,0.3)">
+        Start Free Assessment
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12H19"/><path d="M14 7L19 12L14 17"/></svg>
+      </button>
+      <div class="stats-row" style="border-top:1px solid rgba(200,169,110,0.15);position:relative;z-index:1">
+        <div><div class="stat-num" style="font-family:'Cormorant Garamond',serif;color:#FDFAF5">6,000<span style="color:#C8A96E">+</span></div><div class="stat-label" style="font-family:Sora;color:rgba(255,255,255,0.3)">Assessed</div></div>
+        <div style="width:1px;background:rgba(200,169,110,0.15)"></div>
+        <div><div class="stat-num" style="font-family:'Cormorant Garamond',serif;color:#FDFAF5">4.9</div><div class="stat-label" style="font-family:Sora;color:rgba(255,255,255,0.3)">Rating</div></div>
+      </div>
+    </div>
+    <div class="label" style="background:#111;color:#C8A96E">C. Dark Luxury &mdash; Cormorant + Sora</div>
+    <div class="sublabel" style="background:#111">Same fonts as A but on dark. Gold gradient text, gold CTA button, gold dot-grid texture. This is the Rolls-Royce / Five-star hotel direction. Maximum premium signal.</div>
+  </div>
+
+  <!-- D: Playfair Display + DM Sans (elevated current) -->
+  <div class="card" onclick="pick(this,'d')">
+    <div class="hero-mock" style="background:linear-gradient(160deg,#FDFAF5,#F0E8D8)">
+      <div class="tag" style="background:white;border:1px solid rgba(0,0,0,0.05);color:#1A6B4A">
+        <div class="dot" style="background:#1A6B4A"></div>
+        <span style="font-family:'DM Sans';font-weight:500">GMC Registered</span>
+      </div>
+      <h1 style="font-family:'Playfair Display',serif;font-size:40px;line-height:1.1;font-weight:700;color:#1A1A1A;letter-spacing:-0.5px;margin-bottom:16px">
+        Your Knee Pain<br>
+        <span style="color:#B8912E">Has Better Options</span><br>
+        Than Surgery
+      </h1>
+      <p class="body-text" style="font-family:'DM Sans';color:#6B6B6B;font-weight:400">
+        Explore non-surgical regenerative approaches backed by published research. Get your personalised score in 2 minutes.
+      </p>
+      <button class="cta-btn" style="background:#1A1A1A;color:white;font-family:'DM Sans'">
+        Start Free Assessment
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12H19"/><path d="M14 7L19 12L14 17"/></svg>
+      </button>
+      <div class="stats-row" style="border-top:1px solid rgba(0,0,0,0.06)">
+        <div><div class="stat-num" style="font-family:'Playfair Display',serif;color:#1A1A1A">6,000<span style="color:#C8A96E">+</span></div><div class="stat-label" style="font-family:'DM Sans';color:#AAA">Assessed</div></div>
+        <div style="width:1px;background:rgba(0,0,0,0.06)"></div>
+        <div><div class="stat-num" style="font-family:'Playfair Display',serif;color:#1A1A1A">4.9</div><div class="stat-label" style="font-family:'DM Sans';color:#AAA">Rating</div></div>
+      </div>
+    </div>
+    <div class="label" style="background:#111;color:#eee">D. Playfair Display + DM Sans (Current, Polished)</div>
+    <div class="sublabel" style="background:#111">The current serif, elevated. Playfair is bolder and more decorative than Cormorant. Familiar, safe, well-executed. Less editorial, more "established clinic."</div>
+  </div>
+
+</div>
+
+<div style="text-align:center;padding:16px 24px 40px;font-size:12px;color:#555;max-width:700px;margin:0 auto;line-height:1.7">
+  <strong style="color:#999">My recommendation:</strong> Option A (Cormorant Garamond + Outfit) on the warm light background for the best balance of luxury and approachability. Option C is the most premium but may feel too dark for a medical audience. Click your favourite and let me know in the terminal.
+</div>
+
+<script>
+function pick(el,choice){
+  document.querySelectorAll('.card').forEach(c=>c.classList.remove('picked'));
+  el.classList.add('picked');
+  // Record for companion events
+  if(window.recordChoice) window.recordChoice(choice);
+}
+</script>
+</body>
+</html>

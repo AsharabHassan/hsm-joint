@@ -4,6 +4,7 @@ export interface Testimonial {
   initials: string;
   label: string;
   rating: number;
+  treatment: string;
 }
 
 export const testimonials: Testimonial[] = [
@@ -14,6 +15,7 @@ export const testimonials: Testimonial[] = [
     initials: "JT",
     label: "Verified Patient",
     rating: 5,
+    treatment: "Knee Consultation",
   },
   {
     quote:
@@ -22,6 +24,7 @@ export const testimonials: Testimonial[] = [
     initials: "SM",
     label: "Verified Patient",
     rating: 5,
+    treatment: "Hip Assessment",
   },
   {
     quote:
@@ -30,6 +33,7 @@ export const testimonials: Testimonial[] = [
     initials: "DR",
     label: "Verified Patient",
     rating: 5,
+    treatment: "Shoulder Review",
   },
   {
     quote:
@@ -38,6 +42,7 @@ export const testimonials: Testimonial[] = [
     initials: "EL",
     label: "Verified Patient",
     rating: 5,
+    treatment: "Back Consultation",
   },
   {
     quote:
@@ -46,5 +51,6 @@ export const testimonials: Testimonial[] = [
     initials: "MK",
     label: "Verified Patient",
     rating: 5,
+    treatment: "Knee Treatment",
   },
 ];

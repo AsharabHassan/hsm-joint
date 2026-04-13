@@ -23,12 +23,11 @@ export interface QuizSubmission {
 }
 
 export async function submitToGoHighLevel(
-  data: QuizSubmission
+  data: QuizSubmission,
+  webhookUrl: string
 ): Promise<{ success: boolean; error?: string }> {
-  const webhookUrl = process.env.GHL_WEBHOOK_URL;
-
   if (!webhookUrl) {
-    console.error("GHL_WEBHOOK_URL environment variable not set");
+    console.error("No GHL webhook URL configured for source:", data.source);
     return { success: false, error: "Webhook URL not configured" };
   }
 
@@ -64,7 +63,7 @@ export async function submitToGoHighLevel(
           `body-area:${data.bodyArea}`,
           `score:${data.scoreLabel.toLowerCase().replace(/\s+/g, "-")}`,
           `advanced:${data.matchedTreatments.advancedOptions}`,
-          "source:landing-page",
+          `source:${data.source}`,
         ],
       }),
     });

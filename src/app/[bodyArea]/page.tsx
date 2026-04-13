@@ -1,10 +1,8 @@
 /**
  * GOOGLE ADS COMPLIANCE NOTE:
  * This page is designed to receive Google Ads traffic.
- * - Hero, Quiz, QuizResults, TreatmentCards, PatientJourney, DoctorProfiles: CLEAN (no restricted terms)
- * - ConditionCards: Contains educational references to PRP with research citations (educational exception may apply)
- * - ComparisonTable: Contains PRP/exosome/stem-cell column headers — NEEDS UPDATE for strict compliance
- * - Footer: Contains one reference to "PRP and stem cell-based" — NEEDS UPDATE for strict compliance
+ * - ComparisonTable REMOVED — contained PRP/exosome/stem-cell column headers
+ * - Hero, Quiz, QuizResults, TreatmentCards, PatientJourney, DoctorProfiles: CLEAN
  * - SocialProof, StatsSection, TraditionalRisks, Testimonials, LocationTrust, FAQ, BottomCTA: CLEAN
  */
 import { notFound } from "next/navigation";
@@ -20,10 +18,11 @@ import {
 import { Hero } from "@/components/Hero";
 import { Quiz } from "@/components/Quiz";
 import { SocialProof } from "@/components/SocialProof";
+import { FinancingBar } from "@/components/FinancingBar";
 import { StatsSection } from "@/components/StatsSection";
-import { ConditionCards } from "@/components/ConditionCards";
+import { ConditionSections } from "@/components/ConditionSections";
 import { TraditionalRisks } from "@/components/TraditionalRisks";
-import { ComparisonTable } from "@/components/ComparisonTable";
+// ComparisonTable removed — contains PRP/exosome/stem-cell terms, not ad-safe
 import { TreatmentCards } from "@/components/TreatmentCards";
 import { Testimonials } from "@/components/Testimonials";
 import { LocationTrust } from "@/components/LocationTrust";
@@ -31,6 +30,8 @@ import { FAQ } from "@/components/FAQ";
 import { BottomCTA } from "@/components/BottomCTA";
 import { PatientJourney } from "@/components/PatientJourney";
 import { DoctorProfiles } from "@/components/DoctorProfiles";
+import { ImageDivider } from "@/components/ui/ImageDivider";
+import { VideoSection } from "@/components/VideoSection";
 
 export function generateStaticParams() {
   return getAllBodyAreaSlugs().map((slug) => ({ bodyArea: slug }));
@@ -86,17 +87,24 @@ export default async function BodyAreaPage({
         }}
       />
       <Hero bodyArea={bodyArea} />
-      <Quiz bodyAreaSlug={slug} />
+      <FinancingBar />
+      <Quiz bodyAreaSlug={slug} pageSource={slug} />
       <SocialProof />
       <PatientJourney />
+      <ImageDivider src="/images/clinic/treatment-room.jpg" alt="Treatment room at Harley Street Wellness" />
       <StatsSection bodyAreaSlug={slug} />
-      <ConditionCards
+      <ConditionSections
         conditions={bodyArea.conditions}
         bodyAreaName={bodyArea.name}
       />
       <TraditionalRisks bodyArea={bodyArea} />
-      <ComparisonTable />
+      <VideoSection
+        title={`Understanding ${bodyArea.name}: The Latest Research`}
+        subtitle={`Our specialists break down the published evidence on non-surgical treatments for ${bodyArea.name.toLowerCase()} — what works, what doesn't, and what's right for you.`}
+        topic={slug}
+      />
       <TreatmentCards bodyAreaName={bodyArea.name} />
+      <ImageDivider src="/images/clinic/consultation.jpg" alt="Specialist consultation at Harley Street" />
       <DoctorProfiles />
       <Testimonials />
       <LocationTrust />

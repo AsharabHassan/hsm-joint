@@ -2,7 +2,9 @@ import Link from "next/link";
 import { bodyAreas } from "@/data/bodyAreas";
 import { Card } from "@/components/ui/Card";
 import { SocialProof } from "@/components/SocialProof";
-import { ComparisonTable } from "@/components/ComparisonTable";
+import { FinancingBar } from "@/components/FinancingBar";
+import { VideoSection } from "@/components/VideoSection";
+// ComparisonTable removed — contains PRP/exosome/stem-cell terms, not ad-safe
 import { TreatmentCards } from "@/components/TreatmentCards";
 import { Testimonials } from "@/components/Testimonials";
 import { LocationTrust } from "@/components/LocationTrust";
@@ -66,7 +68,7 @@ export default function HomePage() {
               <span className="text-[12px] text-muted">Harley Street, London</span>
             </div>
 
-            <h1 className="font-serif text-h1-mobile lg:text-[52px] lg:leading-[1.06] font-bold text-charcoal mb-5 leading-tight">
+            <h1 className="font-serif text-h1-mobile lg:text-[62px] lg:leading-[1.06] font-bold text-charcoal mb-5 leading-tight">
               Non-Surgical Solutions for{" "}
               <span className="relative inline">
                 <span
@@ -113,6 +115,8 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      <FinancingBar />
 
       {/* ─── Lead Capture Form (right after hero) ───────────────── */}
       <LeadCaptureForm />
@@ -171,8 +175,12 @@ export default function HomePage() {
         </div>
       </section>
 
-      <ComparisonTable />
       <TreatmentCards bodyAreaName="Joint Pain" />
+      <VideoSection
+        title="Non-Surgical Joint Pain Treatment: The Research"
+        subtitle="Watch our Harley Street specialists explain how modern injection therapies are helping patients avoid or delay surgery."
+        topic="homepage"
+      />
       <Testimonials />
       <LocationTrust />
     </>

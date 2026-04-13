@@ -1,6 +1,6 @@
 import type { FAQ } from "@/data/faqs";
 
-const BASE_URL = "https://harleystreetmedicalwellness.co.uk";
+const BASE_URL = "https://harleystreetwellness.co.uk";
 
 export function generateFAQSchema(faqs: FAQ[]) {
   return {
@@ -23,8 +23,8 @@ export function generateMedicalClinicSchema() {
     "@type": "MedicalClinic" as const,
     name: "Harley Street Wellness",
     url: BASE_URL,
-    telephone: "+44-20-XXXX-XXXX",
-    email: "info@harleystreetmedicalwellness.co.uk",
+    telephone: "+44-20-4628-3137",
+    email: "hello@harleystreetwellness.co.uk",
     address: {
       "@type": "PostalAddress" as const,
       streetAddress: "10 Harley Street",
@@ -41,23 +41,29 @@ export function generateMedicalClinicSchema() {
     availableService: [
       {
         "@type": "MedicalTherapy" as const,
-        name: "PRP Therapy",
+        name: "Cortisone Injections",
         description:
-          "Platelet-rich plasma therapy using concentrated platelets from the patient's own blood",
+          "Anti-inflammatory corticosteroid injections for acute joint pain and inflammation",
       },
       {
         "@type": "MedicalTherapy" as const,
-        name: "Exosome Therapy",
+        name: "Hyaluronic Acid Injections",
         description:
-          "Regenerative approach using nanoscale vesicles derived from mesenchymal stem cells",
+          "Joint lubrication therapy to improve cushioning and reduce pain in arthritic joints",
       },
       {
         "@type": "MedicalTherapy" as const,
-        name: "Regenerative Cell Therapy",
+        name: "Non-Surgical Joint Treatment",
         description:
-          "Advanced regenerative approach using mesenchymal stem cells from bone marrow or adipose tissue",
+          "Evidence-based injection therapies for musculoskeletal conditions as alternatives to surgery",
       },
     ],
+    aggregateRating: {
+      "@type": "AggregateRating" as const,
+      ratingValue: "4.9",
+      reviewCount: "200",
+      bestRating: "5",
+    },
   };
 }
 

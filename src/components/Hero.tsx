@@ -2,8 +2,17 @@
 
 import { Button } from "@/components/ui/Button";
 import { CountUp } from "@/components/ui/CountUp";
-import { MedicalCrossIcon, StarIcon, ClockIcon } from "@/components/ui/Icons";
+import { StarIcon, ClockIcon } from "@/components/ui/Icons";
 import type { BodyArea } from "@/data/bodyAreas";
+
+const heroImages: Record<string, string> = {
+  "knee-pain": "/images/hero/hero-knee-pain.jpg",
+  "hip-pain": "/images/hero/hero-hip-pain.jpg",
+  "shoulder-pain": "/images/hero/hero-shoulder-pain.jpg",
+  "back-pain": "/images/hero/hero-back-pain.jpg",
+  "elbow-pain": "/images/hero/hero-elbow-pain.jpg",
+  "hand-wrist-foot-ankle": "/images/hero/hero-hand-wrist-foot-ankle.jpg",
+};
 
 interface HeroProps {
   bodyArea: BodyArea;
@@ -73,7 +82,7 @@ export function Hero({ bodyArea }: HeroProps) {
             </div>
 
             {/* Headline */}
-            <h1 className="font-serif text-h1-mobile lg:text-[52px] lg:leading-[1.06] font-bold text-charcoal mb-5 leading-tight">
+            <h1 className="font-serif text-h1-mobile lg:text-[62px] lg:leading-[1.06] font-bold text-charcoal mb-5 leading-tight">
               <span className="relative inline">
                 <span
                   style={{
@@ -96,7 +105,7 @@ export function Hero({ bodyArea }: HeroProps) {
             </h1>
 
             {/* Subheadline */}
-            <p className="text-[17px] text-slate mb-8 leading-relaxed max-w-xl font-sans">
+            <p className="text-lg text-slate mb-8 leading-relaxed max-w-xl font-sans">
               {bodyArea.subheadline}
             </p>
 
@@ -176,38 +185,49 @@ export function Hero({ bodyArea }: HeroProps) {
 
           {/* Right column — desktop only */}
           <div className="hidden lg:block relative">
-            {/* Floating clinic card */}
+            {/* Image showcase container */}
             <div
-              className="relative bg-white rounded-[22px] overflow-hidden"
+              className="relative rounded-[22px] overflow-hidden h-[480px]"
               style={{
                 boxShadow:
                   "0 24px 72px rgba(0,0,0,0.08), 0 0 0 1px rgba(0,0,0,0.03)",
                 animation: "gentleGlow 4s ease-in-out infinite",
               }}
             >
-              {/* Gradient top half */}
-              <div
-                className="h-[280px] flex items-center justify-center"
-                style={{
-                  background: "linear-gradient(135deg, #2D5F5D, #1B3A4B)",
-                }}
-              >
-                <MedicalCrossIcon size={64} className="text-white/20" />
-              </div>
+              {heroImages[bodyArea.slug] ? (
+                <>
+                  {/* Hero image */}
+                  <img
+                    src={heroImages[bodyArea.slug]}
+                    alt={bodyArea.name}
+                    className="w-full h-full object-cover"
+                  />
+                  {/* Subtle gradient overlay for badge readability */}
+                  <div
+                    className="absolute inset-0"
+                    style={{
+                      background:
+                        "linear-gradient(to bottom, transparent 50%, rgba(0,0,0,0.20) 100%)",
+                    }}
+                  />
+                </>
+              ) : (
+                /* Placeholder when no image exists yet */
+                <div
+                  className="w-full h-full flex flex-col items-center justify-center gap-3"
+                  style={{
+                    background: "linear-gradient(135deg, #2D5F5D, #1B3A4B)",
+                  }}
+                >
+                  <p className="text-white/60 text-lg font-semibold tracking-wide">
+                    Image Coming Soon
+                  </p>
+                </div>
+              )}
 
-              {/* Card body */}
-              <div className="p-6">
-                <p className="font-serif text-lg font-bold text-charcoal">
-                  Harley Street Wellness
-                </p>
-                <p className="text-sm text-muted mt-1">
-                  Premium regenerative medicine
-                </p>
-              </div>
-
-              {/* Star rating badge — overlapping bottom of gradient */}
+              {/* Star rating badge — bottom-left overlay */}
               <div
-                className="absolute left-5 top-[250px] bg-white rounded-[14px] px-4 py-2.5 flex items-center gap-2"
+                className="absolute left-5 bottom-5 bg-white rounded-[14px] px-4 py-2.5 flex items-center gap-2"
                 style={{
                   boxShadow: "0 8px 32px rgba(0,0,0,0.1)",
                 }}
@@ -220,9 +240,26 @@ export function Hero({ bodyArea }: HeroProps) {
                 <span className="font-bold text-sm text-charcoal">4.9</span>
                 <span className="text-[11px] text-muted">Verified</span>
               </div>
+
+              {/* Online now indicator — top overlay */}
+              <div
+                className="absolute top-4 right-4 bg-white rounded-full px-3.5 py-1.5 flex items-center gap-2"
+                style={{
+                  boxShadow: "0 8px 24px rgba(0,0,0,0.08)",
+                  animation: "float 5s ease-in-out infinite 1s",
+                }}
+              >
+                <div
+                  className="w-2 h-2 rounded-full bg-green-bright"
+                  style={{ animation: "pulse 2s ease-in-out infinite" }}
+                />
+                <span className="text-[12px] font-bold text-charcoal">
+                  Online now
+                </span>
+              </div>
             </div>
 
-            {/* Floating testimonial card */}
+            {/* Floating testimonial card — bottom-right */}
             <div
               className="absolute -bottom-4 -right-4 bg-white rounded-[16px] p-4 max-w-[230px]"
               style={{
@@ -246,23 +283,6 @@ export function Hero({ bodyArea }: HeroProps) {
                   Verified Patient
                 </span>
               </div>
-            </div>
-
-            {/* Online now indicator */}
-            <div
-              className="absolute -top-3 right-4 bg-white rounded-full px-3.5 py-1.5 flex items-center gap-2"
-              style={{
-                boxShadow: "0 8px 24px rgba(0,0,0,0.08)",
-                animation: "float 5s ease-in-out infinite 1s",
-              }}
-            >
-              <div
-                className="w-2 h-2 rounded-full bg-green-bright"
-                style={{ animation: "pulse 2s ease-in-out infinite" }}
-              />
-              <span className="text-[12px] font-bold text-charcoal">
-                Online now
-              </span>
             </div>
           </div>
         </div>

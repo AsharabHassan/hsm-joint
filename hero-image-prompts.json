@@ -1,0 +1,72 @@
+{
+  "generator": "NanoBanan v2",
+  "style": "photorealistic",
+  "aspect_ratio": "16:9",
+  "pages": [
+    {
+      "page": "/knee-pain",
+      "filename": "hero-knee-pain.jpg",
+      "prompt": "Professional medical photography inside a premium London clinic. A GMC-registered specialist in a white coat performing an ultrasound-guided knee injection on a middle-aged patient lying comfortably on a treatment bed. Modern medical equipment visible. Warm clinical lighting, clean white and teal interior, Harley Street aesthetic. The doctor is focused and confident, the patient looks relaxed and reassured. Shallow depth of field, sharp focus on the knee and doctor's hands. No text overlays. Photorealistic, 8K, cinematic lighting."
+    },
+    {
+      "page": "/hip-pain",
+      "filename": "hero-hip-pain.jpg",
+      "prompt": "Professional medical photography inside a luxury London orthopaedic clinic. A specialist examining a patient's hip joint using ultrasound imaging on a monitor screen. Patient lying on their side on a premium treatment bed. Modern teal and white clinic interior with subtle gold accents. Warm overhead lighting, medical ultrasound screen glowing in background. Doctor wearing white coat with stethoscope. Calm, professional atmosphere. Shallow depth of field. No text overlays. Photorealistic, 8K, cinematic lighting."
+    },
+    {
+      "page": "/shoulder-pain",
+      "filename": "hero-shoulder-pain.jpg",
+      "prompt": "Professional medical photography in a high-end Harley Street clinic treatment room. A doctor carefully examining a patient's shoulder, one hand palpating the rotator cuff area while the other hand holds an ultrasound probe. Patient seated upright, wearing a medical gown with shoulder exposed. Clean modern clinic interior with teal accent wall, medical monitor showing ultrasound imagery in soft focus background. Natural and clinical lighting blend. Professional, reassuring atmosphere. No text overlays. Photorealistic, 8K, cinematic lighting."
+    },
+    {
+      "page": "/back-pain",
+      "filename": "hero-back-pain.jpg",
+      "prompt": "Professional medical photography in a premium London spinal clinic. A specialist reviewing a spine MRI scan on a large monitor while consulting with a patient sitting beside them. The MRI shows a lumbar spine in high detail. Modern minimalist clinic office with white walls, teal medical chair, warm desk lamp. Both doctor and patient engaged in discussion, doctor pointing at the screen explaining the diagnosis. Trust and expertise conveyed. No text overlays. Photorealistic, 8K, cinematic lighting."
+    },
+    {
+      "page": "/elbow-pain",
+      "filename": "hero-elbow-pain.jpg",
+      "prompt": "Professional medical photography in a luxury London orthopaedic clinic. Close-up of a specialist performing an ultrasound-guided injection into a patient's elbow joint. Ultrasound probe in one hand, syringe in the other. Patient's arm resting on a padded support. Medical ultrasound screen visible in soft-focus background showing the elbow joint. Clean white treatment room with modern equipment, subtle teal accents. Precise, skilled medical procedure. No text overlays. Photorealistic, 8K, cinematic lighting."
+    },
+    {
+      "page": "/hand-wrist-foot-ankle",
+      "filename": "hero-hand-wrist-foot-ankle.jpg",
+      "prompt": "Professional medical photography in a premium Harley Street clinic. A specialist gently examining a patient's hand and wrist, feeling the joints carefully with both hands. Patient seated across from the doctor at a clean modern desk. X-ray images of hand bones visible on a lightbox or monitor in the background. Warm clinical lighting, white and teal interior, medical diplomas subtly visible on wall. Compassionate, detailed examination. No text overlays. Photorealistic, 8K, cinematic lighting."
+    },
+    {
+      "page": "/cortisone-injections",
+      "filename": "hero-cortisone.jpg",
+      "prompt": "Professional medical photography of a cortisone injection procedure in a premium London clinic. Close-up of a doctor's gloved hands drawing cortisone medication from a medical vial into a syringe. Treatment tray with sterile supplies visible. Ultrasound machine and probe in soft-focus background. Clean, bright clinical environment with white surfaces and teal accents. Sharp focus on the syringe and vial, bokeh background. Precision and sterility conveyed. No text overlays. Photorealistic, 8K, cinematic lighting."
+    },
+    {
+      "page": "/joint-pain",
+      "filename": "hero-joint-pain.jpg",
+      "prompt": "Professional medical photography in a luxury Harley Street wellness clinic waiting area. A warm, welcoming modern reception with a middle-aged patient being greeted by a friendly receptionist. Premium interior design — marble-effect reception desk, teal velvet chairs, gold accent lighting, fresh flowers, medical credentials framed on the wall. Large windows letting in natural London light. Feels like a five-star hotel lobby, not a hospital. Welcoming, premium, trustworthy atmosphere. No text overlays. Photorealistic, 8K, cinematic lighting."
+    },
+    {
+      "page": "/pain-management-london",
+      "filename": "hero-pain-management-london.jpg",
+      "prompt": "Professional architectural photography of a premium medical clinic exterior on Harley Street, London. Georgian townhouse facade with a polished brass clinic nameplate beside an elegant black door. Classic London architecture with white Portland stone, iron railings, and window boxes with greenery. A well-dressed patient walking up the steps. Late afternoon golden hour light. The street is clean and prestigious. Conveys exclusivity, heritage, and medical excellence. No text overlays. Photorealistic, 8K, cinematic lighting."
+    },
+    {
+      "page": "/prp",
+      "filename": "hero-prp.jpg",
+      "prompt": "Professional medical photography of a PRP therapy preparation in a premium clinic laboratory. A centrifuge machine spinning with blood vials visible through the clear lid, golden-yellow PRP layer clearly separated in the tubes. A specialist in surgical gloves carefully handling a vial of concentrated platelet-rich plasma, the golden liquid catching the light. Clean white laboratory counter with sterile equipment. Medical precision and advanced science conveyed. Warm clinical lighting with teal background accents. No text overlays. Photorealistic, 8K, cinematic lighting."
+    },
+    {
+      "page": "/exosomes",
+      "filename": "hero-exosomes.jpg",
+      "prompt": "Professional medical photography of an advanced regenerative medicine laboratory in a premium London clinic. A specialist in a white coat examining a vial of clear exosome solution held up to the light. Modern laboratory equipment in the background — biosafety cabinet, microscope, cryogenic storage unit. Cool blue and teal lighting reflecting off stainless steel surfaces. Futuristic yet clinical atmosphere conveying cutting-edge science. The vial catches the light with a subtle luminous quality. No text overlays. Photorealistic, 8K, cinematic lighting."
+    },
+    {
+      "page": "/stem-cells",
+      "filename": "hero-stem-cells.jpg",
+      "prompt": "Professional medical photography of a stem cell therapy procedure in a premium London clinic. A specialist performing a bone marrow aspiration from the patient's hip area, using a specialised needle under ultrasound guidance. The patient is lying comfortably on a treatment bed with sterile draping. A centrifuge and processing equipment visible on a side table. Modern, clean treatment room with teal accent walls and premium medical equipment. Serious, advanced medical procedure conveyed with care and precision. No text overlays. Photorealistic, 8K, cinematic lighting."
+    },
+    {
+      "page": "/ (homepage)",
+      "filename": "hero-homepage.jpg",
+      "prompt": "Professional medical photography of a premium Harley Street clinic consultation room. A confident, approachable doctor in a white coat sitting across from a patient at a sleek modern desk, having a warm consultation. An anatomical joint model visible on the desk between them. Large monitor on the wall showing a joint scan. Floor-to-ceiling windows with soft London daylight streaming in. Teal and gold interior accents, medical books on shelves, framed GMC certificate on wall. Trust, expertise, and premium care conveyed. No text overlays. Photorealistic, 8K, cinematic lighting."
+    }
+  ]
+}
