@@ -184,6 +184,16 @@ export function Quiz({ bodyAreaSlug, pageSource }: QuizProps) {
       // Still show results even if API call fails
     }
 
+    const dl = window as Window & { dataLayer?: object[] };
+    dl.dataLayer = dl.dataLayer || [];
+    dl.dataLayer.push({
+      event: "form_submit",
+      form_type: "quiz",
+      page_source: pageSource,
+      body_area: bodyAreaSlug,
+      score: calculatedScore,
+    });
+
     setSubmitting(false);
     setState("results");
   }

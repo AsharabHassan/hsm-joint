@@ -31,6 +31,14 @@ export function LeadCaptureForm() {
       // Still show success
     }
 
+    const dl = window as Window & { dataLayer?: object[] };
+    dl.dataLayer = dl.dataLayer || [];
+    dl.dataLayer.push({
+      event: "form_submit",
+      form_type: "lead_capture",
+      page_source: "homepage",
+    });
+
     setSubmitting(false);
     setSubmitted(true);
   }
