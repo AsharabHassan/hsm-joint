@@ -60,16 +60,18 @@ export default function PainManagementLondonPage() {
                 <span className="text-[13px] text-muted">No obligation</span>
               </div>
 
-              <div className="flex flex-wrap gap-3">
-                <div className="inline-flex items-center gap-2 bg-trust-green-light border border-trust-green/20 rounded-full px-4 py-2">
-                  <ClockIcon size={14} className="text-trust-green" />
-                  <span className="text-[12px] font-semibold text-trust-green">Skip the 28-week NHS wait</span>
-                </div>
-                <div className="inline-flex items-center gap-2 bg-white border border-black/[0.06] rounded-full px-4 py-2">
-                  <StarIcon size={14} className="text-gold" />
-                  <span className="text-[12px] font-semibold text-charcoal">4.9/5 Patient Rating</span>
-                </div>
-              </div>
+              <ul className="flex flex-col gap-2.5">
+                {[
+                  "Fast-access appointments available",
+                  "Free suitability assessment — no obligation",
+                  "4.9/5 patient rating",
+                ].map((item) => (
+                  <li key={item} className="flex items-center gap-2.5 text-[13px] font-medium text-charcoal">
+                    <CheckCircleIcon size={16} className="text-trust-green" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
             </div>
 
             {/* Hero Image */}
@@ -119,7 +121,7 @@ export default function PainManagementLondonPage() {
                 <div className="gold-line" /><span>Why Harley Street Wellness</span><div className="gold-line" />
               </div>
               <h2 className="font-serif text-h2-mobile lg:text-h2-desktop font-bold mb-3">
-                Pain Management That Works
+                Our Approach to Pain Management
               </h2>
             </div>
           </FadeIn>
@@ -143,7 +145,16 @@ export default function PainManagementLondonPage() {
         </div>
       </section>
 
-      <Quiz bodyAreaSlug="general" pageSource="pain-management-london" />
+      <Quiz
+        bodyAreaSlug="general"
+        pageSource="pain-management-london"
+        headline={
+          <>
+            Could You Be Suitable for{" "}
+            <span className="gradient-text-animated">Non-Surgical Treatment?</span>
+          </>
+        }
+      />
       <SocialProof />
       <PatientJourney />
       <TreatmentCards bodyAreaName="Chronic Pain" />

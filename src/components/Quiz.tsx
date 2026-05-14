@@ -25,11 +25,12 @@ import {
 interface QuizProps {
   bodyAreaSlug: string;
   pageSource: string;
+  headline?: React.ReactNode;
 }
 
 type QuizState = "questions" | "contact" | "results";
 
-export function Quiz({ bodyAreaSlug, pageSource }: QuizProps) {
+export function Quiz({ bodyAreaSlug, pageSource, headline }: QuizProps) {
   const config = getQuizConfig(bodyAreaSlug);
   const questions = config?.questions ?? [];
 
@@ -243,7 +244,9 @@ export function Quiz({ bodyAreaSlug, pageSource }: QuizProps) {
             <div className="w-12 h-[1px] bg-gradient-to-l from-transparent to-gold/60" />
           </div>
           <h2 className="font-serif text-h2-mobile lg:text-h2-desktop font-bold text-white mb-4">
-            {bodyAreaSlug === "cortisone" ? (
+            {headline ? (
+              headline
+            ) : bodyAreaSlug === "cortisone" ? (
               <>
                 Is a Cortisone Injection{" "}
                 <span className="gradient-text-animated">Right For You?</span>

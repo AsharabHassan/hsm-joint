@@ -28,8 +28,7 @@ export function Footer() {
               </div>
             </div>
             <p className="text-[13px] leading-relaxed mb-5 text-white/40">
-              Educational resources about non-surgical approaches to joint pain.
-              GMC-registered specialists providing evidence-based consultations.
+              Harley Street Medical Wellness is a private clinic offering non-surgical consultations and injection therapies for joint and muscle pain. All treatments are carried out by GMC-registered doctors at our London clinics.
             </p>
 
             {/* Google Reviews Badge */}
