@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/Button";
 import { NrsSlider } from "@/components/NrsSlider";
 import { QuizResults } from "@/components/QuizResults";
 import { getQuizConfig, type QuizOption } from "@/data/quizQuestions";
+import { trackLeadSubmit } from "@/lib/analytics";
 import {
   calculateScore,
   getScoreLabel,
@@ -150,6 +151,16 @@ export function Quiz({ bodyAreaSlug, pageSource, headline }: QuizProps) {
 
     const matchLabels = getTreatmentMatchLabels(calculatedScore);
 
+    // Fire the conversion event immediately so a slow or failed network
+    // request can never block it. GTM should fire on a Custom Event trigger
+    // matching event name "form_submit".
+    trackLeadSubmit({
+      form_type: "quiz",
+      page_source: pageSource,
+      body_area: bodyAreaSlug,
+      score: calculatedScore,
+    });
+
     try {
       await fetch("/api/quiz-submit", {
         method: "POST",
@@ -184,16 +195,6 @@ export function Quiz({ bodyAreaSlug, pageSource, headline }: QuizProps) {
     } catch {
       // Still show results even if API call fails
     }
-
-    const dl = window as Window & { dataLayer?: object[] };
-    dl.dataLayer = dl.dataLayer || [];
-    dl.dataLayer.push({
-      event: "form_submit",
-      form_type: "quiz",
-      page_source: pageSource,
-      body_area: bodyAreaSlug,
-      score: calculatedScore,
-    });
 
     setSubmitting(false);
     setState("results");

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { trackLeadSubmit } from "@/lib/analytics";
 import { Button } from "@/components/ui/Button";
 import {
   ShieldCheckIcon,
@@ -17,6 +18,14 @@ export function LeadCaptureForm() {
     e.preventDefault();
     setSubmitting(true);
 
+    // Fire the conversion event immediately so a slow or failed network
+    // request can never block it. GTM should fire on a Custom Event trigger
+    // matching event name "form_submit".
+    trackLeadSubmit({
+      form_type: "lead_capture",
+      page_source: "homepage",
+    });
+
     try {
       await fetch("/api/quiz-submit", {
         method: "POST",
@@ -30,14 +39,6 @@ export function LeadCaptureForm() {
     } catch {
       // Still show success
     }
-
-    const dl = window as Window & { dataLayer?: object[] };
-    dl.dataLayer = dl.dataLayer || [];
-    dl.dataLayer.push({
-      event: "form_submit",
-      form_type: "lead_capture",
-      page_source: "homepage",
-    });
 
     setSubmitting(false);
     setSubmitted(true);
