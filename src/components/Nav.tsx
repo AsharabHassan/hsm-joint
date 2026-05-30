@@ -8,6 +8,9 @@ import { bodyAreas } from "@/data/bodyAreas";
 export function Nav() {
   const pathname = usePathname();
 
+  // "Back" (back-pain) is intentionally hidden from the nav menu.
+  const navAreas = bodyAreas.filter((area) => area.slug !== "back-pain");
+
   return (
     <nav className="sticky top-0 z-50 bg-cream/97 backdrop-blur-2xl border-b border-black/[0.04]">
       <div className="max-w-page mx-auto w-full px-4 md:px-8">
@@ -45,7 +48,7 @@ export function Nav() {
               Joint Pain
             </Link>
             <div className="w-[1px] h-4 bg-black/[0.06] mx-1" />
-            {bodyAreas.map((area) => {
+            {navAreas.map((area) => {
               const isActive = pathname === `/${area.slug}`;
               return (
                 <Link
@@ -87,7 +90,7 @@ export function Nav() {
           >
             Joint Pain
           </Link>
-          {bodyAreas.map((area) => {
+          {navAreas.map((area) => {
             const isActive = pathname === `/${area.slug}`;
             return (
               <Link
