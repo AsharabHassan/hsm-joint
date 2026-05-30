@@ -153,7 +153,7 @@ export function Quiz({ bodyAreaSlug, pageSource, headline }: QuizProps) {
 
     // Fire the conversion event immediately so a slow or failed network
     // request can never block it. GTM should fire on a Custom Event trigger
-    // matching event name "form_submit".
+    // matching event name "hsw_lead_submit".
     trackLeadSubmit({
       form_type: "quiz",
       page_source: pageSource,
