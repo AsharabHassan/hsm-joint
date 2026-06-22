@@ -120,12 +120,12 @@ export default function JointPainPage() {
           </FadeIn>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4 max-w-3xl mx-auto">
             {[
-              { name: "Knee Pain", href: "/knee-pain" },
-              { name: "Hip Pain", href: "/hip-pain" },
-              { name: "Shoulder Pain", href: "/shoulder-pain" },
-              { name: "Back Pain", href: "/back-pain" },
-              { name: "Elbow Pain", href: "/elbow-pain" },
-              { name: "Hand, Wrist, Foot & Ankle", href: "/hand-wrist-foot-ankle" },
+              { name: "Knee Pain", href: "/glasgow/knee-pain" },
+              { name: "Hip Pain", href: "/glasgow/hip-pain" },
+              { name: "Shoulder Pain", href: "/glasgow/shoulder-pain" },
+              { name: "Back Pain", href: "/glasgow/back-pain" },
+              { name: "Elbow Pain", href: "/glasgow/elbow-pain" },
+              { name: "Hand, Wrist, Foot & Ankle", href: "/glasgow/hand-wrist-foot-ankle" },
             ].map((area, i) => (
               <FadeIn key={area.href} delay={i * 60}>
                 <a href={area.href} className="block">
