@@ -35,6 +35,7 @@ export interface Location {
   };
   geo: { latitude: number; longitude: number };
   mapEmbedUrl: string;
+  mapTitle: string;
   transport: TransportLine[];
 }
 
@@ -69,6 +70,7 @@ export const locations: Record<LocationSlug, Location> = {
     geo: { latitude: 51.5155, longitude: -0.1484 },
     mapEmbedUrl:
       "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2482.8!2d-0.1484!3d51.5155!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2s10+Harley+Street%2C+London+W1G+9PF!5e0!3m2!1sen!2suk!4v1",
+    mapTitle: "Harley Street Wellness Locations",
     transport: [
       { mode: "🚇", text: "Oxford Circus (3 min walk) · Regent's Park (5 min walk)" },
       { mode: "🚌", text: "Bus routes: 88, 453, C2 — stop on Harley Street" },
@@ -107,6 +109,7 @@ export const locations: Record<LocationSlug, Location> = {
     geo: { latitude: 55.8602, longitude: -4.2466 },
     mapEmbedUrl:
       "https://www.google.com/maps?q=227+Ingram+St,+Glasgow+G1+1DA&output=embed",
+    mapTitle: "Harley Street Wellness — Glasgow",
     transport: [
       // TODO: confirm exact walking times
       { mode: "🚇", text: "Buchanan Street Subway (4 min walk)" },

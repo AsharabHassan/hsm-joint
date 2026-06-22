@@ -101,7 +101,7 @@ export function LocationTrust({ location = "london" }: { location?: LocationSlug
                 allowFullScreen
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
-                title={`${loc.brandName} — ${loc.cityName}`}
+                title={loc.mapTitle}
               />
             </div>
           </FadeIn>
