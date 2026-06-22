@@ -9,7 +9,10 @@ import {
   UserCheckIcon,
 } from "@/components/ui/Icons";
 
-export function LeadCaptureForm() {
+export function LeadCaptureForm({
+  pageSource = "homepage",
+  bodyArea = "homepage",
+}: { pageSource?: string; bodyArea?: string } = {}) {
   const [contact, setContact] = useState({ name: "", email: "", phone: "" });
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
@@ -23,18 +26,14 @@ export function LeadCaptureForm() {
     // matching event name "hsw_lead_submit".
     trackLeadSubmit({
       form_type: "lead_capture",
-      page_source: "homepage",
+      page_source: pageSource,
     });
 
     try {
       await fetch("/api/quiz-submit", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          ...contact,
-          bodyArea: "homepage",
-          pageSource: "homepage",
-        }),
+        body: JSON.stringify({ ...contact, bodyArea, pageSource }),
       });
     } catch {
       // Still show success
