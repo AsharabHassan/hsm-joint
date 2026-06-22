@@ -32,3 +32,21 @@ describe("generateBreadcrumbSchema", () => {
     expect(schema.itemListElement[1].item).toContain("/knee-pain");
   });
 });
+
+describe("generateMedicalClinicSchema location awareness", () => {
+  it("defaults to the London Harley Street address", () => {
+    const s = generateMedicalClinicSchema();
+    expect(s.address.streetAddress).toBe("10 Harley Street");
+    expect(s.address.postalCode).toBe("W1G 9PF");
+    expect(s.telephone).toBe("+44-20-4628-3137");
+  });
+
+  it("emits the Glasgow address and geo when location=glasgow", () => {
+    const s = generateMedicalClinicSchema("glasgow");
+    expect(s.address.addressLocality).toBe("Glasgow");
+    expect(s.address.postalCode).toBe("G1 1DA");
+    expect(s.telephone).toBe("+44-141-488-8985");
+    expect(s.geo.latitude).toBe(55.8602);
+    expect(s.url).toBe("https://harleystreetmedicalwellness.co.uk");
+  });
+});

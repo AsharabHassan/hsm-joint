@@ -1,6 +1,5 @@
 import type { FAQ } from "@/data/faqs";
-
-const BASE_URL = "https://harleystreetwellness.co.uk";
+import { getLocation, type LocationSlug } from "@/data/locations";
 
 export function generateFAQSchema(faqs: FAQ[]) {
   return {
@@ -17,25 +16,26 @@ export function generateFAQSchema(faqs: FAQ[]) {
   };
 }
 
-export function generateMedicalClinicSchema() {
+export function generateMedicalClinicSchema(location: LocationSlug = "london") {
+  const loc = getLocation(location);
   return {
     "@context": "https://schema.org",
     "@type": "MedicalClinic" as const,
-    name: "Harley Street Wellness",
-    url: BASE_URL,
-    telephone: "+44-20-4628-3137",
-    email: "hello@harleystreetwellness.co.uk",
+    name: loc.brandName,
+    url: loc.baseUrl,
+    telephone: loc.telephoneE164,
+    email: loc.email,
     address: {
       "@type": "PostalAddress" as const,
-      streetAddress: "10 Harley Street",
-      addressLocality: "London",
-      postalCode: "W1G 9PF",
+      streetAddress: loc.schemaAddress.streetAddress,
+      addressLocality: loc.schemaAddress.addressLocality,
+      postalCode: loc.schemaAddress.postalCode,
       addressCountry: "GB",
     },
     geo: {
       "@type": "GeoCoordinates" as const,
-      latitude: 51.5155,
-      longitude: -0.1484,
+      latitude: loc.geo.latitude,
+      longitude: loc.geo.longitude,
     },
     medicalSpecialty: "Musculoskeletal Medicine",
     availableService: [
@@ -60,29 +60,29 @@ export function generateMedicalClinicSchema() {
     ],
     aggregateRating: {
       "@type": "AggregateRating" as const,
-      ratingValue: "4.9",
-      reviewCount: "200",
+      ratingValue: loc.reviewRating,
+      reviewCount: loc.reviewCount,
       bestRating: "5",
     },
   };
 }
 
-export function generateBreadcrumbSchema(pageName: string, pagePath: string) {
+export function generateBreadcrumbSchema(
+  pageName: string,
+  pagePath: string,
+  location: LocationSlug = "london"
+) {
+  const base = getLocation(location).baseUrl;
   return {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList" as const,
     itemListElement: [
-      {
-        "@type": "ListItem" as const,
-        position: 1,
-        name: "Home",
-        item: BASE_URL,
-      },
+      { "@type": "ListItem" as const, position: 1, name: "Home", item: base },
       {
         "@type": "ListItem" as const,
         position: 2,
         name: pageName,
-        item: `${BASE_URL}${pagePath}`,
+        item: `${base}${pagePath}`,
       },
     ],
   };
@@ -93,29 +93,26 @@ export function generateMedicalWebPageSchema(
   description: string,
   path: string,
   datePublished: string,
-  dateModified: string
+  dateModified: string,
+  location: LocationSlug = "london"
 ) {
+  const loc = getLocation(location);
   return {
     "@context": "https://schema.org",
     "@type": "MedicalWebPage" as const,
     name: title,
     description,
-    url: `${BASE_URL}${path}`,
+    url: `${loc.baseUrl}${path}`,
     datePublished,
     dateModified,
     publisher: {
       "@type": "MedicalOrganization" as const,
-      name: "Harley Street Wellness",
-      url: BASE_URL,
+      name: loc.brandName,
+      url: loc.baseUrl,
     },
-    about: {
-      "@type": "MedicalCondition" as const,
-      name: title,
-    },
+    about: { "@type": "MedicalCondition" as const, name: title },
     inLanguage: "en-GB",
     isAccessibleForFree: true,
-    medicalAudience: {
-      "@type": "PatientAudience" as const,
-    },
+    medicalAudience: { "@type": "PatientAudience" as const },
   };
 }
