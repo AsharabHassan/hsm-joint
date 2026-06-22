@@ -1,9 +1,17 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { bodyAreas } from "@/data/bodyAreas";
 import { Button } from "@/components/ui/Button";
+import { getLocationFromPath } from "@/data/locations";
 
 export function Footer() {
+  const pathname = usePathname();
+  const loc = getLocationFromPath(pathname);
+  const prefix = loc.pathPrefix;
+
   return (
     <footer className="bg-charcoal text-white/70">
       <div className="max-w-page mx-auto px-4 py-16 md:py-20">
@@ -68,7 +76,7 @@ export function Footer() {
               {bodyAreas.map((area) => (
                 <li key={area.slug}>
                   <Link
-                    href={`/${area.slug}`}
+                    href={`${prefix}/${area.slug}`}
                     className="text-[13px] text-white/40 hover:text-gold transition-colors duration-200"
                   >
                     {area.name}
@@ -84,18 +92,18 @@ export function Footer() {
               Our Clinics
             </h4>
             <div className="space-y-5">
-              <address className="text-[13px] not-italic text-white/40 leading-relaxed">
-                <strong className="text-white/70 block mb-1">Harley Street Clinic</strong>
-                10 Harley Street<br />
-                London W1G 9PF<br />
-                United Kingdom
-              </address>
-              <address className="text-[13px] not-italic text-white/40 leading-relaxed">
-                <strong className="text-white/70 block mb-1">Portpool Lane Clinic</strong>
-                1-5 Portpool Ln<br />
-                London EC1N 7UU<br />
-                United Kingdom
-              </address>
+              {loc.clinics.map((clinic) => (
+                <address key={clinic.name} className="text-[13px] not-italic text-white/40 leading-relaxed">
+                  <strong className="text-white/70 block mb-1">{clinic.name}</strong>
+                  {clinic.lines.map((line, i) => (
+                    <span key={i}>
+                      {line}
+                      <br />
+                    </span>
+                  ))}
+                  United Kingdom
+                </address>
+              ))}
             </div>
           </div>
 
@@ -106,35 +114,33 @@ export function Footer() {
             </h4>
             <div className="space-y-3 mb-6">
               <a
-                href="tel:02046283137"
+                href={`tel:${loc.phoneHref}`}
                 className="flex items-center gap-2.5 text-[13px] text-white/50 hover:text-gold transition-colors duration-200"
               >
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-gold/60 shrink-0">
                   <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z" />
                 </svg>
-                020 4628 3137
+                {loc.phoneDisplay}
               </a>
               <a
-                href="mailto:hello@harleystreetwellness.co.uk"
+                href={`mailto:${loc.email}`}
                 className="flex items-center gap-2.5 text-[13px] text-white/50 hover:text-gold transition-colors duration-200"
               >
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-gold/60 shrink-0">
                   <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
                   <polyline points="22,6 12,13 2,6" />
                 </svg>
-                hello@harleystreetwellness.co.uk
+                {loc.email}
               </a>
             </div>
 
             <div className="space-y-2 mb-6">
-              <div className="flex items-center gap-2 text-[12px] text-white/30">
-                <span>🚇</span>
-                <span>Oxford Circus (3 min) · Regent&apos;s Park (5 min)</span>
-              </div>
-              <div className="flex items-center gap-2 text-[12px] text-white/30">
-                <span>🚌</span>
-                <span>Bus: 88, 453, C2</span>
-              </div>
+              {loc.transport.map((t, i) => (
+                <div key={i} className="flex items-center gap-2 text-[12px] text-white/30">
+                  <span>{t.mode}</span>
+                  <span>{t.text}</span>
+                </div>
+              ))}
             </div>
 
             <Button variant="outline" size="sm">
@@ -198,7 +204,7 @@ export function Footer() {
             </p>
             <p>
               All consultations and treatments are carried out by GMC-registered
-              doctors at our Harley Street clinic.
+              doctors {loc.slug === "glasgow" ? "at our Glasgow clinic" : "at our Harley Street clinic"}.
             </p>
             <p>
               Booking a consultation does not commit you to any treatment. The
@@ -207,7 +213,7 @@ export function Footer() {
             </p>
           </div>
           <div className="mt-8 pt-4 border-t border-white/5 text-[11px] text-white/20 text-center">
-            &copy; {new Date().getFullYear()} Harley Street Wellness. All rights
+            &copy; {new Date().getFullYear()} {loc.brandName}. All rights
             reserved.
           </div>
         </div>
