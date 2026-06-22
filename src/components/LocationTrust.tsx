@@ -1,6 +1,7 @@
 import { Card } from "@/components/ui/Card";
 import { FadeIn } from "@/components/ui/FadeIn";
 import { ShieldCheckIcon, LocationPinIcon, MedicalCrossIcon } from "@/components/ui/Icons";
+import { getLocation, type LocationSlug } from "@/data/locations";
 
 const clinicImages = [
   { src: "/images/clinic/reception.jpg", alt: "Clinic reception area" },
@@ -9,7 +10,8 @@ const clinicImages = [
   { src: "/images/clinic/harley-street.jpg", alt: "Harley Street entrance" },
 ];
 
-export function LocationTrust() {
+export function LocationTrust({ location = "london" }: { location?: LocationSlug } = {}) {
+  const loc = getLocation(location);
   return (
     <section className="bg-ivory/50 py-20 md:py-28">
       <div className="max-w-page mx-auto px-4">
@@ -21,10 +23,10 @@ export function LocationTrust() {
               <div className="gold-line" />
             </div>
             <h2 className="font-serif text-h2-mobile lg:text-h2-desktop font-bold mb-3">
-              Find Us in London
+              {loc.locationHeading}
             </h2>
             <p className="text-sm text-slate max-w-lg mx-auto">
-              Two convenient locations in the heart of London&apos;s prestigious medical district
+              {loc.locationSubheading}
             </p>
           </div>
         </FadeIn>
@@ -65,7 +67,7 @@ export function LocationTrust() {
               </svg>
               <div>
                 <div className="flex items-center gap-2">
-                  <span className="text-[24px] font-bold text-charcoal">4.9</span>
+                  <span className="text-[24px] font-bold text-charcoal">{loc.reviewRating}</span>
                   <div className="flex gap-0.5">
                     {[1, 2, 3, 4, 5].map((star) => (
                       <svg key={star} width="18" height="18" viewBox="0 0 24 24" fill="#FBBC04" stroke="#FBBC04" strokeWidth="1">
@@ -74,11 +76,11 @@ export function LocationTrust() {
                     ))}
                   </div>
                 </div>
-                <p className="text-[12px] text-slate">Based on 200+ verified patient reviews on Google</p>
+                <p className="text-[12px] text-slate">{`Based on ${loc.reviewCount}+ verified patient reviews on Google`}</p>
               </div>
             </div>
             <a
-              href="https://g.co/kgs/harleystreetwellness"
+              href={loc.reviewsUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="text-[12px] font-semibold text-charcoal bg-cream hover:bg-gold/10 rounded-pill px-5 py-2.5 transition-colors duration-200 whitespace-nowrap"
@@ -92,14 +94,14 @@ export function LocationTrust() {
           <FadeIn delay={100}>
             <div className="rounded-card overflow-hidden h-80 shadow-card">
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2482.8!2d-0.1484!3d51.5155!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2s10+Harley+Street%2C+London+W1G+9PF!5e0!3m2!1sen!2suk!4v1"
+                src={loc.mapEmbedUrl}
                 width="100%"
                 height="100%"
                 style={{ border: 0 }}
                 allowFullScreen
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
-                title="Harley Street Wellness Locations"
+                title={`${loc.brandName} — ${loc.cityName}`}
               />
             </div>
           </FadeIn>
@@ -117,7 +119,7 @@ export function LocationTrust() {
                 <div className="grid grid-cols-2 gap-3 mb-6">
                   {[
                     { icon: MedicalCrossIcon, label: "GMC Registered" },
-                    { icon: LocationPinIcon, label: "2 London Clinics" },
+                    { icon: LocationPinIcon, label: loc.clinicCountLabel },
                     { icon: ShieldCheckIcon, label: "Evidence-Based" },
                     { icon: ShieldCheckIcon, label: "No Obligation" },
                   ].map((badge) => (
@@ -136,45 +138,41 @@ export function LocationTrust() {
               <div className="border-t border-ivory pt-5 space-y-4">
                 {/* Clinic addresses */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <address className="text-[13px] text-slate not-italic leading-relaxed">
-                    <strong className="text-charcoal block mb-1">Harley Street Clinic</strong>
-                    10 Harley Street<br />
-                    London W1G 9PF
-                  </address>
-                  <address className="text-[13px] text-slate not-italic leading-relaxed">
-                    <strong className="text-charcoal block mb-1">Portpool Lane Clinic</strong>
-                    1-5 Portpool Ln<br />
-                    London EC1N 7UU
-                  </address>
+                  {loc.clinics.map((clinic) => (
+                    <address key={clinic.name} className="text-[13px] text-slate not-italic leading-relaxed">
+                      <strong className="text-charcoal block mb-1">{clinic.name}</strong>
+                      {clinic.lines.map((line, i) => (
+                        <span key={i}>{line}{i < clinic.lines.length - 1 ? <br /> : null}</span>
+                      ))}
+                    </address>
+                  ))}
                 </div>
 
                 {/* Contact info */}
                 <div className="flex flex-col sm:flex-row gap-3 sm:gap-6 text-sm text-slate">
-                  <a href="tel:02046283137" className="flex items-center gap-2 hover:text-gold transition-colors">
+                  <a href={`tel:${loc.phoneHref}`} className="flex items-center gap-2 hover:text-gold transition-colors">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-gold shrink-0">
                       <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z" />
                     </svg>
-                    020 4628 3137
+                    {loc.phoneDisplay}
                   </a>
-                  <a href="mailto:hello@harleystreetwellness.co.uk" className="flex items-center gap-2 hover:text-gold transition-colors">
+                  <a href={`mailto:${loc.email}`} className="flex items-center gap-2 hover:text-gold transition-colors">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-gold shrink-0">
                       <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
                       <polyline points="22,6 12,13 2,6" />
                     </svg>
-                    hello@harleystreetwellness.co.uk
+                    {loc.email}
                   </a>
                 </div>
 
                 {/* Transport */}
                 <div className="flex flex-col gap-2">
-                  <div className="flex items-center gap-2">
-                    <span className="text-[12px]">🚇</span>
-                    <span className="text-[12px] text-slate">Oxford Circus (3 min walk) · Regent&apos;s Park (5 min walk)</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <span className="text-[12px]">🚌</span>
-                    <span className="text-[12px] text-slate">Bus routes: 88, 453, C2 — stop on Harley Street</span>
-                  </div>
+                  {loc.transport.map((t) => (
+                    <div key={t.text} className="flex items-center gap-2">
+                      <span className="text-[12px]">{t.mode}</span>
+                      <span className="text-[12px] text-slate">{t.text}</span>
+                    </div>
+                  ))}
                 </div>
               </div>
             </Card>
