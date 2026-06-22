@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/Button";
 import { CountUp } from "@/components/ui/CountUp";
 import { StarIcon, ClockIcon } from "@/components/ui/Icons";
 import type { BodyArea } from "@/data/bodyAreas";
+import { getLocation, type LocationSlug } from "@/data/locations";
 
 const heroImages: Record<string, string> = {
   "knee-pain": "/images/hero/hero-knee-pain.jpg",
@@ -16,9 +17,11 @@ const heroImages: Record<string, string> = {
 
 interface HeroProps {
   bodyArea: BodyArea;
+  location?: LocationSlug;
 }
 
-export function Hero({ bodyArea }: HeroProps) {
+export function Hero({ bodyArea, location = "london" }: HeroProps) {
+  const loc = getLocation(location);
   return (
     <section className="hero-gradient relative overflow-hidden min-h-[90vh] flex items-center">
       {/* Grid pattern overlay */}
@@ -77,7 +80,7 @@ export function Hero({ bodyArea }: HeroProps) {
               </div>
               <span className="text-muted/40">&#xB7;</span>
               <span className="text-[12px] text-muted">
-                Harley Street, London
+                {loc.slug === "glasgow" ? "Ingram St, Glasgow" : "Harley Street, London"}
               </span>
             </div>
 
