@@ -13,6 +13,28 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }));
 
+  const glasgowBodyAreaRoutes = bodyAreaSlugs.map((slug) => ({
+    url: `${BASE_URL}/glasgow/${slug}`,
+    lastModified: new Date(),
+    changeFrequency: "monthly" as const,
+    priority: 0.8,
+  }));
+
+  const glasgowRoutes = [
+    "/glasgow",
+    "/glasgow/joint-pain",
+    "/glasgow/pain-management",
+    "/glasgow/cortisone-injections",
+    "/glasgow/prp",
+    "/glasgow/exosomes",
+    "/glasgow/stem-cells",
+  ].map((path) => ({
+    url: `${BASE_URL}${path}`,
+    lastModified: new Date(),
+    changeFrequency: "monthly" as const,
+    priority: path === "/glasgow" ? 0.9 : 0.8,
+  }));
+
   return [
     {
       url: BASE_URL,
@@ -57,5 +79,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
     ...bodyAreaRoutes,
+    ...glasgowRoutes,
+    ...glasgowBodyAreaRoutes,
   ];
 }
